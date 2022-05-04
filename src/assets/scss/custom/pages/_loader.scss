@@ -1,0 +1,8 @@
+.loader-view {
+    margin: 200px auto;
+
+    @media(min-width: 576px) {
+        max-width: 80%;
+    }
+
+}

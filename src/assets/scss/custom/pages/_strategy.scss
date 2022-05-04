@@ -1,0 +1,33 @@
+.strategy-view {
+    margin-bottom: 25px;
+
+    .app-page-title {
+        margin-bottom: 0;
+    }
+
+    .request-response-alert {
+        padding-right: 30px;
+        position: fixed;
+        bottom: 0;
+        margin-bottom: 10px;
+        z-index: 10;
+    }
+
+    .alert {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1000px;
+    }
+
+    @media(max-width: 768px) {
+        .request-response-alert {
+            padding-right: 15px;
+        }
+    }
+
+    @media(min-width: 1350px) {
+        .alert {
+            margin-left: 0;
+        }
+    }
+}

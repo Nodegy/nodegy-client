@@ -1,0 +1,33 @@
+.error-overlay {
+    .error-overlay-container {
+        display: flex;
+        height: 400px;
+        width: 500px;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .error-text {
+            font-size: 1rem;
+        }
+
+        @media(max-width: 576px) {
+            .error-text {
+                font-size: 0.8rem;
+            }
+        }
+    }
+
+
+    @media(max-width: 576px) {
+        .error-overlay-container {
+            width: 400px;
+        }
+    }
+
+    @media(max-width: 450px) {
+        .error-overlay-container {
+            width: 325px;
+        }
+    }
+
+}

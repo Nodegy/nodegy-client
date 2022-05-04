@@ -1,0 +1,188 @@
+.navbar {
+    padding: $navbar-padding-base 5%;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+
+    @media(min-width: 991px) {
+        padding: $navbar-padding-base 3%;
+    }
+
+    a {
+        vertical-align: middle;
+
+        &:not(.btn):not(.dropdown-item) {
+            color: $white-color;
+        }
+    }
+
+    p {
+        display: inline-block;
+        margin: 0;
+        line-height: 21px;
+        font-weight: inherit;
+        font-size: inherit;
+    }
+
+    .navbar-nav {
+
+        .nav-link.btn {
+            padding: $padding-btn-vertical $padding-btn-horizontal;
+
+            &.btn-lg {
+                padding: $padding-large-vertical $padding-large-horizontal;
+            }
+
+            &.btn-sm {
+                padding: $padding-small-vertical $padding-small-horizontal;
+            }
+        }
+
+        .nav-link:not(.btn) {
+            text-transform: uppercase;
+            font-size: $font-size-mini;
+            padding: $padding-base-vertical $padding-base-horizontal;
+            line-height: $line-height-nav-link;
+
+            .disabled {
+                opacity: .5;
+                color: $white-color;
+            }
+        }
+
+        .nav-item.active .nav-link:not(.btn),
+        .nav-item .nav-link:not(.btn):focus,
+        .nav-item .nav-link:not(.btn):hover,
+        .nav-item .nav-link:not(.btn):active {
+            background-color: $opacity-2;
+            border-radius: $border-radius-small;
+        }
+    }
+
+    .navbar-brand {
+        position: relative;
+        height: max-content;
+        width: max-content;
+
+        .nav-brand-logo {
+            position: absolute;
+            top: -6px;
+            left: 60px;
+            opacity: 20%;
+        }
+
+        .nav-brand-logo img {
+            max-height: 54px;
+        }
+
+        .nav-brand-text {
+            max-width: 100%;
+
+        }
+
+        .nav-brand-text img {
+            max-height: 30px;
+        }
+    }
+
+    .navbar-brand:hover {
+
+        .nav-brand-text {
+            transition: all .2s ease-in-out;
+            transform: scale(1.25);
+        }
+
+        .nav-brand-logo {
+            opacity: 100%;
+        }
+    }
+
+    .navbar-toggler {
+        width: 37px;
+        height: 27px;
+        outline: 0;
+        cursor: pointer;
+
+        &.navbar-toggler-left {
+            position: relative;
+            left: 0;
+            padding-left: 0;
+        }
+
+        .navbar-toggler-bar.middle-bar {
+            width: 17px;
+            transition: width .2s linear;
+        }
+
+        &:hover {
+            & .navbar-toggler-bar.middle-bar {
+                width: 22px;
+            }
+        }
+    }
+
+    .button-dropdown {
+        .navbar-toggler-bar:nth-child(2) {
+            width: 17px;
+        }
+    }
+
+    &.navbar-transparent {
+        background-color: $transparent-bg !important;
+        box-shadow: none;
+        color: $white-color;
+        padding-top: 20px !important;
+    }
+
+    &.bg-white:not(.navbar-transparent) {
+        a:not(.dropdown-item):not(.btn) {
+            color: $default-color;
+
+            &.disabled {
+                opacity: .5;
+                color: $default-color;
+            }
+        }
+
+        .button-bar {
+            background: $default-color;
+        }
+
+        .nav-item.active .nav-link:not(.btn),
+        .nav-item .nav-link:not(.btn):focus,
+        .nav-item .nav-link:not(.btn):hover,
+        .nav-item .nav-link:not(.btn):active {
+            background-color: $opacity-gray-3;
+        }
+
+        .logo-container {
+            border: 1px solid $default-color;
+        }
+    }
+}
+
+.bg-default {
+    background-color: $default-color !important;
+}
+
+.bg-primary {
+    background-color: $primary-color !important;
+}
+
+.bg-info {
+    background-color: $info-color !important;
+}
+
+.bg-success {
+    background-color: $success-color !important;
+}
+
+.bg-danger {
+    background-color: $danger-color !important;
+}
+
+.bg-warning {
+    background-color: $warning-color !important;
+}
+
+.bg-white {
+    background-color: $white-color !important;
+}

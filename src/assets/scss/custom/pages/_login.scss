@@ -1,0 +1,47 @@
+.login-page {
+    .card-login {
+        border-radius: $border-radius-large;
+        padding-bottom: $padding-base-horizontal;
+        max-width: 320px;
+        margin-top: 75px;
+
+        .auth-invalid-feedback {
+            height: 10px;
+            margin-bottom: 50px;
+        }
+
+        .btn-wd {
+            min-width: 180px;
+        }
+
+        .logo-container {
+            width: 65px;
+            margin: 0 auto;
+            margin-bottom: 55px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        &.card-plain {
+            @include input-coloured-bg($opacity-5, $white-color, $white-color, $transparent-bg, $opacity-1, $opacity-2);
+
+            .input-group-text,
+            .form-group.no-border .input-group-text,
+            .input-group.no-border .input-group-text {
+                color: $opacity-8;
+            }
+        }
+    }
+
+    .link {
+        font-size: 10px;
+        color: $white-color;
+        text-decoration: none;
+    }
+}
