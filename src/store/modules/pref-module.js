@@ -1,4 +1,4 @@
-import { updateLSObj } from "../_helpers/update-ls-obj";
+import { updateLSObj } from '../_helpers/update-ls-obj';
 
 const inputPrefs = JSON.parse(localStorage.getItem('prefs'));
 const initialState = inputPrefs
@@ -17,7 +17,7 @@ export const prefs = {
                 localStorage.setItem('prefs', JSON.stringify(userPrefs));
 
             } catch (err) {
-                console.log(err)
+                console.log(err);
             }
         },
 
@@ -36,19 +36,19 @@ export const prefs = {
                     default:
                         break;
                 };
-                updateLSObj('prefs', key, val)
+                updateLSObj('prefs', key, val);
                 return Promise.resolve(confirm.data);
 
 
             } catch (err) {
-                console.log(`Error in updatePrefs: ${err}`)
-                return Promise.reject(err)
+                console.log(`Error in updatePrefs: ${err}`);
+                return Promise.reject(err);
             };
         },
 
         saveUsername({ commit }, { bool, un }) {
-            updateLSObj('prefs', 'saveUn', { save: bool, un: un })
-            commit('setSaveUsername', { save: bool, un: un })
+            updateLSObj('prefs', 'saveUn', { save: bool, un: un });
+            commit('setSaveUsername', { save: bool, un: un });
 
         },
 
@@ -70,7 +70,7 @@ export const prefs = {
         },
         setTimeFormat(state, format) {
             // 12 || 24
-            state.timeFormat = format
+            state.timeFormat = format;
         },
         setTheme(state, theme) {
             // str

@@ -1,5 +1,5 @@
 import { errorHandler, requestHandler } from '../_utils/index';
-import store from "@/store/index";
+import store from '@/store/index';
 const address = 'adm/signupkeys/';
 const service = 'Admin Signup Keys';
 

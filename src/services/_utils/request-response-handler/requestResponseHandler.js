@@ -1,4 +1,4 @@
-import store from "@/store/index";
+import store from '@/store/index';
 import { createMessage, determineShouldSend } from './_helpers/index';
 
 export default async (isErr, payload, res, requestType, service) => {

@@ -6,11 +6,11 @@ export const signupKeys = {
 
     actions: {
         init({ commit }, signupKeys) {
-            commit("setSignupKeys", signupKeys);
+            commit('setSignupKeys', signupKeys);
         },
 
         delete({ commit }, keyIds) {
-            commit("onDeleteSignupKeys", keyIds);
+            commit('onDeleteSignupKeys', keyIds);
         }
     },
 

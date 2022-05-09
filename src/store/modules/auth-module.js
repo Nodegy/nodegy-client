@@ -1,6 +1,6 @@
 import AuthService from '@/services/auth/auth-service';
-import { updateLSObj } from "../_helpers/update-ls-obj";
-import { errorHandler } from "@/services/_utils/index";
+import { updateLSObj } from '../_helpers/update-ls-obj';
+import { errorHandler } from '@/services/_utils/index';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
@@ -85,13 +85,13 @@ export const auth = {
             state.user = null;
         },
         setUserName(state, username) {
-            state.user.username = username
+            state.user.username = username;
         },
         setUserEmail(state, email) {
-            state.user.email = email
+            state.user.email = email;
         },
         setRoles(state, roles) {
-            state.user.roles = roles
+            state.user.roles = roles;
         }
     },
 

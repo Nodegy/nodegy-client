@@ -1,6 +1,6 @@
-import uniqueId from "lodash/uniqueId";
-import { EmailUs, Landing } from "@/pages/landing/index";
-import { Login } from "@/pages/auth/index";
+import uniqueId from 'lodash/uniqueId';
+import { EmailUs, Landing } from '@/pages/landing/index';
+import { Login } from '@/pages/auth/index';
 import MainNavbar from '@/layout-landing/MainNavbar.vue';
 
 const iDidentifier = 'publicanduser-';
@@ -33,10 +33,10 @@ const routes = [
         }
     }
 
-]
+];
 
 export default routes.map(route => {
     return {
         ...route, id: uniqueId(iDidentifier), meta: meta
-    }
+    };
 });

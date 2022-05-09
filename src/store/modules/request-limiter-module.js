@@ -11,11 +11,11 @@ export const requestLimiter = {
 
     actions: {
         documentRequest({ state, commit }) {
-            commit("toggleRequestsAllowed");
-            commit("setModuleInterval");
+            commit('toggleRequestsAllowed');
+            commit('setModuleInterval');
             if (state.requestsAllowed) {
-                commit("incrementNumberOfRequests");
-                commit("setComponentTimer");
+                commit('incrementNumberOfRequests');
+                commit('setComponentTimer');
             };
         },
     },
@@ -34,12 +34,12 @@ export const requestLimiter = {
             if (!state.moduleIntervalActive) {
                 state.moduleIntervalActive = true;
                 const intervalId = setInterval(() => {
-                    this.commit("requestLimiter/toggleRequestsAllowed");
+                    this.commit('requestLimiter/toggleRequestsAllowed');
                     if (state.requestsAllowed) {
                         state.moduleIntervalActive = false;
                         clearInterval(intervalId);
                     };
-                }, 1000)
+                }, 1000);
             }
         },
         toggleRequestsAllowed(state) {

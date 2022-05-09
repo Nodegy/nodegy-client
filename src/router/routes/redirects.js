@@ -14,10 +14,10 @@ const routes = [
         component: () => import('@/pages/redirects/AccessDenied.vue')
     },
 
-]
+];
 
 export default routes.map(route => {
     return {
         ...route, meta: meta
-    }
+    };
 });

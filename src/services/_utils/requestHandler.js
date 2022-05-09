@@ -46,7 +46,7 @@ const handleRequest = async (service, requestType, address, payload) => {
         return res;
     } catch (err) {
         await requestResponseHandler(true, payload, err.response, requestType, service);
-        await errorHandler(service, 'handleRequest', err)
+        await errorHandler(service, 'handleRequest', err);
         return err;
     };
 };
@@ -61,7 +61,7 @@ const handleNetworkError = async (requestType, address, payload) => {
     const maxAttempts = parseInt(process.env.VUE_APP_REQUEST_RETRIES);
 
     while (attempts < maxAttempts) {
-        await sleep(2000)
+        await sleep(2000);
         res = await handleRequest(requestType, address, payload);
         attempts += 1;
 

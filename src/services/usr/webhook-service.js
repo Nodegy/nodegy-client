@@ -1,5 +1,5 @@
 import { errorHandler, requestHandler } from '../_utils/index';
-import store from "@/store/index";
+import store from '@/store/index';
 import Webhook from '@/models/webhook';
 const address = 'usr/webhook/';
 const service = 'Webhook';
@@ -17,7 +17,7 @@ class WebhookService {
             return Promise.resolve(res);
         } catch (err) {
             await errorHandler(service, 'create', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 
@@ -35,7 +35,7 @@ class WebhookService {
             };
         } catch (err) {
             await errorHandler(service, 'deleteOne', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 
@@ -53,7 +53,7 @@ class WebhookService {
             };
         } catch (err) {
             await errorHandler(service, 'deleteAll', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 };

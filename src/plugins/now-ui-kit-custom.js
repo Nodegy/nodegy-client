@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 import '@/assets/scss/base.scss';
 import globalDirectives from './globalDirectives';
 import globalMixins from './globalMixins';

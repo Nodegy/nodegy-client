@@ -1,7 +1,7 @@
 import store from '@/store/index.js';
 import { mapGetters } from 'vuex';
 mapGetters({
-    findAlerts: "stratStore/findAlerts",
+    findAlerts: 'stratStore/findAlerts',
 });
 
 export default async (res) => {
