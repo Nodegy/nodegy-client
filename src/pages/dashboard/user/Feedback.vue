@@ -151,7 +151,7 @@ export default {
           this.displayMsg = "Feedback Successfully Submitted.";
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     },
 

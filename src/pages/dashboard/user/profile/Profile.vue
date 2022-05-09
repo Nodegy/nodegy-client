@@ -314,7 +314,7 @@ export default {
     },
 
     setMsg(msg, isErr) {
-      console.log(msg, isErr);
+      // console.log(msg, isErr);
       this.msgColor = isErr ? "text-danger" : "text-success";
       this.message = msg;
       setTimeout(() => (this.message = null), 20000);

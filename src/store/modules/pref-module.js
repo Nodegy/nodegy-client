@@ -17,7 +17,7 @@ export const prefs = {
                 localStorage.setItem('prefs', JSON.stringify(userPrefs));
 
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         },
 
@@ -41,7 +41,7 @@ export const prefs = {
 
 
             } catch (err) {
-                console.log(`Error in updatePrefs: ${err}`);
+                // console.log(`Error in updatePrefs: ${err}`);
                 return Promise.reject(err);
             };
         },

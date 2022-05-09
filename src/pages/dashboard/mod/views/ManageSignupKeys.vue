@@ -71,7 +71,7 @@ export default {
           this.allKeys = allKeys.data.payload;
         }
       } catch (err) {
-        console.log("err: ", err);
+        // console.log("err: ", err);
       }
     },
 

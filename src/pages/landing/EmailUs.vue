@@ -205,7 +205,7 @@ export default {
           ? true
           : false;
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     },
 
