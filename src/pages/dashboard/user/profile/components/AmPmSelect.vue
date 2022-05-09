@@ -53,7 +53,7 @@ export default {
         }
         this.selected = op;
       } catch (err) {
-        console.log(`Error in AmPmSelect: ${err}`);
+        // console.log(`Error in AmPmSelect: ${err}`);
         this.$emit("setMsg", err.response);
       }
     },

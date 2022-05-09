@@ -7,7 +7,7 @@ export const updateLSObj = (name, k, v) => {
         }
 
     } catch (err) {
-        console.log(`Error updating local: ${err}`);
+        // console.log(`Error updating local: ${err}`);
     }
 
 };

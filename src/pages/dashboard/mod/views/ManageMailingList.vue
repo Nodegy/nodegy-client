@@ -60,7 +60,7 @@ export default {
       try {
         await ModMailingListService.getMailingList();
       } catch (err) {
-        console.log("err: ", err);
+        // console.log("err: ", err);
       }
     },
 
@@ -68,7 +68,7 @@ export default {
       try {
         await MailingListService.add(this.form.email);
       } catch (err) {
-        console.log("err: ", err);
+        // console.log("err: ", err);
       }
     },
 

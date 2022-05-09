@@ -94,7 +94,7 @@ export default {
           await UserService.updatePrefs("timezone", tz);
         }
       } catch (err) {
-        console.log(`Error in TimeZoneSelect: ${err}`);
+        // console.log(`Error in TimeZoneSelect: ${err}`);
       }
     },
   },
