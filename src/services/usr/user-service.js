@@ -1,5 +1,5 @@
 import { errorHandler, requestHandler } from '../_utils/index';
-import store from "@/store/index";
+import store from '@/store/index';
 
 const address = 'usr/user/';
 const service = 'User';
@@ -20,7 +20,7 @@ class UserService {
 
         } catch (err) {
             await errorHandler(service, 'update', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 
@@ -39,7 +39,7 @@ class UserService {
 
         } catch (err) {
             await errorHandler(service, 'update', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 
@@ -58,7 +58,7 @@ class UserService {
 
         } catch (err) {
             await errorHandler(service, 'update', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 
@@ -92,7 +92,7 @@ class UserService {
             };
         } catch (err) {
             await errorHandler(service, 'update', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 
@@ -105,13 +105,13 @@ class UserService {
             );
 
             if (res) {
-                await store.dispatch("prefs/clearPrefs");
-                await store.dispatch("auth/logout");
+                await store.dispatch('prefs/clearPrefs');
+                await store.dispatch('auth/logout');
                 return Promise.resolve(true);
             };
         } catch (err) {
             await errorHandler(service, 'delete', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 

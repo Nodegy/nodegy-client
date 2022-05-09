@@ -1,8 +1,8 @@
 import axios from 'axios';
-import store from "@/store/index.js";
-import Preferences from "@/models/preferences";
+import store from '@/store/index.js';
+import Preferences from '@/models/preferences';
 const API_URL = process.env.VUE_APP_API_URL + 'auth/';
-import { errorHandler } from "@/services/_utils/index";
+import { errorHandler } from '@/services/_utils/index';
 
 class AuthService {
     async login(user) {
@@ -22,7 +22,7 @@ class AuthService {
 
                 await store.dispatch('prefs/init', prefStore);
                 await store.dispatch('stratStore/init', stratStore);
-                await store.dispatch('notification/init', notifications)
+                await store.dispatch('notification/init', notifications);
                 await store.dispatch('initApp/initApp', true);
                 await store.dispatch('auth/loginSuccess', userStore);
 

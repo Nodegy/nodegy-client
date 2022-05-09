@@ -1,5 +1,5 @@
 import { errorHandler, requestHandler } from '../_utils/index';
-import store from "@/store/index";
+import store from '@/store/index';
 const address = 'usr/strategy/';
 const service = 'Strategy';
 
@@ -19,12 +19,12 @@ class StrategyService {
                 strategy = res.data.payload;
                 strategy.alerts = alerts;
                 await store.dispatch('stratStore/add', { key: 'strategies', item: strategy });
-                await store.dispatch('selected/setSelected', { item: strategy, cid: cid })
+                await store.dispatch('selected/setSelected', { item: strategy, cid: cid });
                 return Promise.resolve(true);
             };
         } catch (err) {
             await errorHandler(service, 'create', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 
@@ -62,13 +62,13 @@ class StrategyService {
                 let strategy = res.data.payload;
                 strategy.alerts = inputStrat.alerts;
                 await store.dispatch('stratStore/updateStrategies', { strategy: strategy, isNew: false });
-                await store.dispatch('selected/setSelected', { item: strategy, cid: cid })
+                await store.dispatch('selected/setSelected', { item: strategy, cid: cid });
                 return Promise.resolve(true);
             };
 
         } catch (err) {
             await errorHandler(service, 'update', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 
@@ -88,7 +88,7 @@ class StrategyService {
             };
         } catch (err) {
             await errorHandler(service, 'delete', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 };

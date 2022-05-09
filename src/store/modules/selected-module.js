@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue';
 
 export const selected = {
     namespaced: true,
@@ -29,7 +29,7 @@ export const selected = {
                     switch (cidName) {
                         case 'alert':
                             selected = rootGetters['stratStore/findSelected']('alerts', selected);
-                            break
+                            break;
                         case 'strategy':
                             selected = rootGetters['stratStore/findSelected']('strategies', selected);
                             break;

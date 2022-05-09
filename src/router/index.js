@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import store from '@/store/index.js'
-import routes from '@/router/routes/index.js'
+import Vue from 'vue';
+import Router from 'vue-router';
+import store from '@/store/index.js';
+import routes from '@/router/routes/index.js';
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
@@ -31,36 +31,36 @@ router.beforeEach((to, from, next) => {
     const user = store.state.auth.user;
 
     if (loggedIn && onlyLoggedOut) {
-        return next(`dashboard/${user.username}/profile`)
+        return next(`dashboard/${user.username}/profile`);
     }
 
     if (!isPublic && !loggedIn) {
         return next({
             path: '/login',
             query: { redirect: to.fullPath }
-        })
+        });
     }
 
     if (onlyMods) {
-        const authRole = ['moderator', 'admin']
+        const authRole = ['moderator', 'admin'];
         let auth = false;
 
         authRole.forEach(role => {
-            auth = store.state.auth.user.roles.includes(role) ? true : auth
-        })
+            auth = store.state.auth.user.roles.includes(role) ? true : auth;
+        });
 
         if (!auth) {
             return next({
                 path: '/accessdenied',
                 query: { redirect: to.fullPath }
-            })
+            });
         }
     }
 
-    next()
-})
+    next();
+});
 
-export default router
+export default router;
 
 
 

@@ -1,5 +1,5 @@
 import { errorHandler, requestHandler } from '../_utils/index';
-import store from "@/store/index";
+import store from '@/store/index';
 
 const address = 'usr/alert/';
 const service = 'Alert';
@@ -50,7 +50,7 @@ class AlertService {
             if (res) {
                 const alert = res.data.payload;
                 await store.dispatch('stratStore/updateAlerts', { alert: alert, isNew: false });
-                await store.dispatch('selected/setSelected', { item: alert, cid: cid })
+                await store.dispatch('selected/setSelected', { item: alert, cid: cid });
                 return Promise.resolve(alert);
             };
         } catch (err) {

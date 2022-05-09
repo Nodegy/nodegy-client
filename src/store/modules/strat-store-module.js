@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue';
 
 export const stratStore = {
     namespaced: true,
@@ -48,7 +48,7 @@ export const stratStore = {
         },
 
         deleteStrategy({ commit }, id) {
-            commit('delete', { key: 'strategies', id: id })
+            commit('delete', { key: 'strategies', id: id });
         },
 
         updateStrategies({ commit }, { isNew, strategy }) {
@@ -96,13 +96,13 @@ export const stratStore = {
             } else {
                 const idx = state[key].findIndex((arrayItem) => item._id === arrayItem._id);
                 Object.keys(item).forEach(objKey => {
-                    state[key][idx][objKey] = item[objKey]
+                    state[key][idx][objKey] = item[objKey];
                 });
             };
         },
 
         delete(state, { key, id }) {
-            const data = [...state[key]]
+            const data = [...state[key]];
             const idx = data.findIndex((arrayItem) => id === arrayItem._id);
             data.splice(idx, 1);
             Vue.set(state, key, data);
@@ -148,7 +148,7 @@ export const stratStore = {
             let res = [];
             state.alerts.forEach(alert => {
                 if (ids.includes(alert._id)) {
-                    res.push({ ...alert })
+                    res.push({ ...alert });
                 };
             });
             return res;

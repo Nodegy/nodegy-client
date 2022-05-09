@@ -1,5 +1,5 @@
 import { errorHandler, requestHandler } from '../_utils/index';
-import store from "@/store/index";
+import store from '@/store/index';
 
 const address = 'notification/';
 const service = 'Notification';
@@ -18,7 +18,7 @@ class NotificationService {
             return Promise.resolve();
         } catch (err) {
             await errorHandler(service, 'deleteall', err);
-            return Promise.reject(err)
+            return Promise.reject(err);
         };
     };
 

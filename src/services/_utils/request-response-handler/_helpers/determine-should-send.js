@@ -11,7 +11,7 @@ module.exports = (payload, service) => {
             if (payloadKeys.length == 1 && payloadKeys.includes('preferences')) {
                 shouldSend = false;
             };
-            break
+            break;
         default:
             break;
     };

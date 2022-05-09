@@ -8,7 +8,7 @@ export default (inputDate, inputTz, timeFormat) => {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         const strTime = hours + ':' + minutes + ' ' + ampm;
         return strTime;
-    }
+    };
 
     inputTz = inputTz ? inputTz : "GMT-0500";
     const defaultTz = -5;

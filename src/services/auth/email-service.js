@@ -15,14 +15,14 @@ class EmailService {
             .patch(API_URL + 'sendverificationemail', {
                 email: email,
                 oldEmail: oldEmail
-            })
+            });
     };
 
     sendPwResetVCode(email) {
         return axios
             .patch(API_URL + 'sendpwresetvcode', {
                 email: email,
-            }, { withCredentials: false })
+            }, { withCredentials: false });
     };
 
 };

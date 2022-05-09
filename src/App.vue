@@ -19,10 +19,10 @@
 
 
 <script>
-import { mapGetters } from "vuex";
-import intercept from "@/services/intercept";
-import Loader from "@/pages/loader/Loader";
-import SseHandlerService from "@/services/sse/sse-handler-service";
+import { mapGetters } from 'vuex';
+import intercept from '@/services/intercept';
+import Loader from '@/pages/loader/Loader';
+import SseHandlerService from '@/services/sse/sse-handler-service';
 
 export default {
   components: {
@@ -31,16 +31,16 @@ export default {
 
   computed: {
     ...mapGetters({
-      currentUser: "auth/getUser",
-      loggedIn: "auth/getIsLoggedIn",
-      isConfirmed: "auth/getIsConfirmed",
-      appReady: "initApp/getIsAppReady",
+      currentUser: 'auth/getUser',
+      loggedIn: 'auth/getIsLoggedIn',
+      isConfirmed: 'auth/getIsConfirmed',
+      appReady: 'initApp/getIsAppReady',
     }),
 
     layout() {
       return (
-        (this.appReady ? this.$route.meta.layout || "default" : "nonav") +
-        "-layout"
+        (this.appReady ? this.$route.meta.layout || 'default' : 'nonav') +
+        '-layout'
       );
     },
   },
@@ -50,7 +50,7 @@ export default {
       handler(isLoggedIn) {
         if (!isLoggedIn) {
           SseHandlerService.close();
-          this.$router.push("/login");
+          this.$router.push('/login');
         } else if (this.appReady && isLoggedIn) {
           SseHandlerService.init();
         }

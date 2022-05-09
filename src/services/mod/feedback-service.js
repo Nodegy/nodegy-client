@@ -8,7 +8,7 @@ class ModFeedbackService {
     };
 
     setHandled(feedbackId, handleStatus) {
-        return axios.patch(API_URL + `updatehandled`, {
+        return axios.patch(API_URL + 'updatehandled', {
             _id: feedbackId,
             handled: handleStatus
         })
@@ -16,12 +16,12 @@ class ModFeedbackService {
                 return res.data;
             })
             .catch(err => {
-                return err
-            })
+                return err;
+            });
     };
 
     delete(feedbackId) {
-        return axios.delete(API_URL + `deleteone/${feedbackId}`)
+        return axios.delete(API_URL + `deleteone/${feedbackId}`);
     };
 
 }

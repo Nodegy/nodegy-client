@@ -5,7 +5,7 @@ class ModWebhookService {
 
     getAllWebhooks() {
         return axios
-            .get(API_URL + `findall`);
+            .get(API_URL + 'findall');
     };
 
     create(eid, webhook) {

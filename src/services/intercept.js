@@ -1,6 +1,6 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
-import store from '@/store/index.js'
+import store from '@/store/index.js';
 
 axios.interceptors.response.use(
     res => {

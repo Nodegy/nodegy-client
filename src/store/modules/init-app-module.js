@@ -6,7 +6,7 @@ export const initApp = {
 
     actions: {
         initApp({ commit }, isReady) {
-            commit("readyApp", isReady);
+            commit('readyApp', isReady);
         },
     },
 

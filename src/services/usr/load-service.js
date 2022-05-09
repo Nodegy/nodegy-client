@@ -10,7 +10,7 @@ class LoadService {
             if (res) {
                 await store.dispatch('stratStore/init', res.data.payload.stratStore);
                 await store.dispatch('notification/init', res.data.payload.notifications);
-                return Promise.resolve('success')
+                return Promise.resolve('success');
             };
         } catch (err) {
             return Promise.reject(err);

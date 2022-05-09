@@ -89,9 +89,9 @@ $theme-colors: map-merge(
 $headings-font-weight: 400;
 
 $font-size-base: 0.88rem;
-$font-size-lg: ($font-size-base * 1.35);
-$font-size-sm: ($font-size-base * 1.1);
-$font-size-xs: ($font-size-base / 1.1);
+$font-size-lg: calc($font-size-base * 1.35);
+$font-size-sm: calc($font-size-base * 1.1);
+$font-size-xs: calc($font-size-base / 1.1);
 
 $btn-transition: color .15s, background-color .15s, border-color .15s, box-shadow .15s;
 $btn-focus-width: 0;

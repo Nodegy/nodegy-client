@@ -1,5 +1,5 @@
 import { errorHandler, requestHandler } from '../_utils/index';
-import store from "@/store/index";
+import store from '@/store/index';
 const address = 'mod/mailinglist/';
 const service = 'Mod Mailing List';
 

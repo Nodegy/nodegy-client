@@ -6,11 +6,11 @@ export const mailingList = {
 
     actions: {
         init({ commit }, items) {
-            commit("setItems", items);
+            commit('setItems', items);
         },
 
         delete({ commit }, itemIds) {
-            commit("onDeleteItems", itemIds);
+            commit('onDeleteItems', itemIds);
         }
     },
 

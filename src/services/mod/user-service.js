@@ -8,7 +8,7 @@ class ModUserService {
     };
 
     create(user) {
-        return axios.post(API_URL + 'create', user)
+        return axios.post(API_URL + 'create', user);
     };
 
     updateUserName(uid, updatedUserName) {
@@ -16,7 +16,7 @@ class ModUserService {
             .patch(API_URL + 'update', {
                 uid: uid,
                 username: updatedUserName
-            })
+            });
     };
 
     updateUserEmail(uid, updatedEmail) {
@@ -28,7 +28,7 @@ class ModUserService {
     };
 
     delete(uid) {
-        return axios.delete(API_URL + `delete/${uid}`)
+        return axios.delete(API_URL + `delete/${uid}`);
     };
 
 };

@@ -1,4 +1,4 @@
-const root = '/dashboard/:user'
+const root = '/dashboard/:user';
 const meta = { public: false };
 
 const routes = [
@@ -35,5 +35,5 @@ const routes = [
 export default routes.map(route => {
     return {
         ...route, path: `${root}${route.path}`, meta: meta
-    }
+    };
 });
