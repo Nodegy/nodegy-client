@@ -5,6 +5,7 @@
     {{ testStr }}
     {{ typeof testStr }}
     {{ testUnk }}
+    {{ typeof testUnk }}
     <div v-if="!currentUser || !isConfirmed">
       <router-view name="header" />
       <div class="wrapper">
@@ -58,7 +59,7 @@ export default {
     },
 
     testUnk() {
-      return process.env;
+      return process.env.TEST_VAR;
     },
   },
 
