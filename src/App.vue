@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    TEST
     <div v-if="!currentUser || !isConfirmed">
       <router-view name="header" />
       <div class="wrapper">
