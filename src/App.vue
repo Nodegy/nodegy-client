@@ -1,20 +1,21 @@
 <template>
   <div id="app">
-    {{ `test1: ${configTest}` }}
-    {{ `test2: ${configTest2}` }}
-    <div v-if="!currentUser || !isConfirmed">
-      <router-view name="header" />
-      <div class="wrapper">
-        <router-view />
-      </div>
-    </div>
+    <template v-if="siteDisabled">Under Construction</template>
     <template v-else>
-      <component :is="layout">
-        <transition name="fade" mode="out-in">
-          <Loader v-if="loggedIn && !appReady" :loggedIn="loggedIn" />
-          <router-view v-else />
-        </transition>
-      </component>
+      <div v-if="!currentUser || !isConfirmed">
+        <router-view name="header" />
+        <div class="wrapper">
+          <router-view />
+        </div>
+      </div>
+      <template v-else>
+        <component :is="layout">
+          <transition name="fade" mode="out-in">
+            <Loader v-if="loggedIn && !appReady" :loggedIn="loggedIn" />
+            <router-view v-else />
+          </transition>
+        </component>
+      </template>
     </template>
   </div>
 </template>
@@ -46,11 +47,8 @@ export default {
         "-layout"
       );
     },
-    configTest() {
-      return config.API_URL;
-    },
-    configTest2() {
-      return process.env.TEST_ENV_VAR;
+    siteDisabled() {
+      return config.SITE_DISABLED;
     },
   },
 
