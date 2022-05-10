@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    {{ configTest }}
+    {{ `test1: ${configTest}` }}
+    {{ `test2: ${configTest2}` }}
     <div v-if="!currentUser || !isConfirmed">
       <router-view name="header" />
       <div class="wrapper">
@@ -47,6 +48,9 @@ export default {
     },
     configTest() {
       return config.API_URL;
+    },
+    configTest2() {
+      return process.env.TEST_ENV_VAR;
     },
   },
 
