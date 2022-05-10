@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    {{ testBool }}
+    {{ typeof testBool }}
+    {{ testStr }}
+    {{ typeof testStr }}
+    {{ testUnk }}
     <div v-if="!currentUser || !isConfirmed">
       <router-view name="header" />
       <div class="wrapper">
@@ -42,6 +47,18 @@ export default {
         (this.appReady ? this.$route.meta.layout || "default" : "nonav") +
         "-layout"
       );
+    },
+
+    testBool() {
+      return process.env.VUE_APP_TEST_ENV_BOOL;
+    },
+
+    testStr() {
+      return process.env.VUE_APP_TEST_ENV_STR;
+    },
+
+    testUnk() {
+      return process.env.VUE_APP_SECONDS_CYCLE;
     },
   },
 
