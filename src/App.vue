@@ -1,11 +1,6 @@
 <template>
   <div id="app">
-    {{ testBool }}
-    {{ typeof testBool }}
-    {{ testStr }}
-    {{ typeof testStr }}
-    {{ testUnk }}
-    {{ typeof testUnk }}
+    {{ configTest }}
     <div v-if="!currentUser || !isConfirmed">
       <router-view name="header" />
       <div class="wrapper">
@@ -29,6 +24,7 @@ import { mapGetters } from "vuex";
 import intercept from "@/services/intercept";
 import Loader from "@/pages/loader/Loader";
 import SseHandlerService from "@/services/sse/sse-handler-service";
+import config from "@/config/config";
 
 export default {
   components: {
@@ -49,17 +45,8 @@ export default {
         "-layout"
       );
     },
-
-    testBool() {
-      return process.env.VUE_APP_TEST_ENV_BOOL;
-    },
-
-    testStr() {
-      return process.env.VUE_APP_TEST_ENV_STR;
-    },
-
-    testUnk() {
-      return process.env.TEST_VAR;
+    configTest() {
+      return config.API_URL;
     },
   },
 

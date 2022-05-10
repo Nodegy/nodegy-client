@@ -1,5 +1,6 @@
 import axios from 'axios';
-const API_URL = process.env.VUE_APP_API_URL + 'auth/verification/';
+import config from "@/config/config";
+const API_URL = config.API_URL + 'auth/verification/';
 
 class EmailService {
 

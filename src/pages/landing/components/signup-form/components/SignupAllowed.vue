@@ -87,6 +87,7 @@ import { BFormInvalidFeedback } from "bootstrap-vue";
 import { getTimezone } from "@/helpers/index";
 import { errorHandler } from "@/services/_utils/index";
 import Preferences from "@/models/preferences";
+import config from "@/config/config";
 
 export default {
   name: "signup-allowed",
@@ -121,7 +122,7 @@ export default {
       }
       this.user.timezone = getTimezone();
 
-      const signupsAllowed = process.env.VUE_APP_ALLOW_SIGNUPS == "true";
+      const signupsAllowed = config.ALLOW_SIGNUPS;
       if (!signupsAllowed) {
         this.user.key = this.signupKey;
       }

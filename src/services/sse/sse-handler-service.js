@@ -1,5 +1,6 @@
 import { errorHandler } from '../_utils/index';
-const API_URL = process.env.VUE_APP_API_URL;
+import config from "@/config/config";
+const API_URL = config.API_URL;
 let source;
 import { handlePayload } from './_helpers/index';
 
