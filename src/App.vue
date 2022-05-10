@@ -58,7 +58,7 @@ export default {
     },
 
     testUnk() {
-      return process.env.VUE_APP_SECONDS_CYCLE;
+      return process.env;
     },
   },
 
