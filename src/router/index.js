@@ -7,12 +7,7 @@ Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
-    routes: [
-        {
-            path: '/',
-            redirect: '/landing'
-        }
-    ].concat(routes),
+    routes: routes,
 
     scrollBehavior: to => {
         if (to.hash) {

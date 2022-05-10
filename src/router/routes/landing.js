@@ -16,7 +16,7 @@ const routes = [
         }
     },
     {
-        path: '/landing',
+        path: '/',
         name: 'landing',
         label: 'Landing',
         components: { default: Landing, header: MainNavbar },
