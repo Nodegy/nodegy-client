@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    {{ testURL }}
     <template v-if="siteDisabled">Under Construction</template>
     <template v-else>
       <div v-if="!currentUser || !isConfirmed">
@@ -49,6 +50,9 @@ export default {
     },
     siteDisabled() {
       return config.SITE_DISABLED;
+    },
+    testURL() {
+      return config.API_URL;
     },
   },
 
