@@ -3,6 +3,7 @@ import errorHandler from './errorHandler';
 import requestResponseHandler from './request-response-handler/requestResponseHandler';
 import config from "@/config/config";
 const API_URL = config.API_URL;
+// const API_URL = '/api/'
 
 const handleRequest = async (service, requestType, address, payload) => {
     payload = payload ? payload : {};
