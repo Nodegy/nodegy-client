@@ -23,7 +23,7 @@ const handleRequest = async (service, requestType, address, payload) => {
         switch (requestType) {
             case 'create':
             case 'post':
-                res = await axios.post(requestAddress, payload, { withCredentials: true });
+                res = await axios.post(requestAddress, payload);
                 break;
             case 'delete':
             case 'deleteone':
