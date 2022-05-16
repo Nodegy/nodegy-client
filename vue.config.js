@@ -4,7 +4,7 @@ module.exports = {
         port: 8081,
     },
     configureWebpack: {
-        devtool: 'source-map'
+        devtool: 'source-map',
     },
     runtimeCompiler: true,
     productionSourceMap: false,

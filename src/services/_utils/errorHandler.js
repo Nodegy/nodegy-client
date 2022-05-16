@@ -1,6 +1,6 @@
 import axios from 'axios';
-
-const API_URL = process.env.VUE_APP_API_URL + 'site/error';
+import config from "@/config/config";
+const API_URL = config.API_URL + 'site/error';
 
 export default async (service, func, err) => {
     try {
@@ -14,7 +14,7 @@ export default async (service, func, err) => {
         if (process.env.NODE_ENV === 'development') {
             // console.log('Error: ', payload, { err });
         };
-        if (process.env.VUE_APP_LOG_ERRORS_TO_DB === 'true') {
+        if (config.LOG_ERRORS_TO_DB) {
             await axios.post(API_URL, payload);
         };
 

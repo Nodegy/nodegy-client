@@ -61,6 +61,7 @@
 <script>
 import { Card } from "@/components";
 import { SignupAllowed, SignupNotAllowed } from "./components/index";
+import config from "@/config/config";
 
 export default {
   name: "Signup",
@@ -81,7 +82,7 @@ export default {
   }),
 
   mounted() {
-    this.signupsAllowed = process.env.VUE_APP_ALLOW_SIGNUPS == "true";
+    this.signupsAllowed = config.ALLOW_SIGNUPS;
     if (!this.signupsAllowed) {
       this.showSignupWithKey = true;
     }

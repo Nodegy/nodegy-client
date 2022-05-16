@@ -1,6 +1,7 @@
 import axios from 'axios';
 import store from '@/store/index';
-const API_URL = process.env.VUE_APP_API_URL + 'usr/load/';
+import config from "@/config/config";
+const API_URL = config.API_URL + 'usr/load/';
 
 class LoadService {
     async stratStore() {

@@ -1,28 +1,32 @@
 <template>
   <div id="app">
-    <div v-if="!currentUser || !isConfirmed">
-      <router-view name="header" />
-      <div class="wrapper">
-        <router-view />
-      </div>
-    </div>
+    <template v-if="siteDisabled">Under Construction</template>
     <template v-else>
-      <component :is="layout">
-        <transition name="fade" mode="out-in">
-          <Loader v-if="loggedIn && !appReady" :loggedIn="loggedIn" />
-          <router-view v-else />
-        </transition>
-      </component>
+      <div v-if="!currentUser || !isConfirmed">
+        <router-view name="header" />
+        <div class="wrapper">
+          <router-view />
+        </div>
+      </div>
+      <template v-else>
+        <component :is="layout">
+          <transition name="fade" mode="out-in">
+            <Loader v-if="loggedIn && !appReady" :loggedIn="loggedIn" />
+            <router-view v-else />
+          </transition>
+        </component>
+      </template>
     </template>
   </div>
 </template>
 
 
 <script>
-import { mapGetters } from 'vuex';
-import intercept from '@/services/intercept';
-import Loader from '@/pages/loader/Loader';
-import SseHandlerService from '@/services/sse/sse-handler-service';
+import { mapGetters } from "vuex";
+import intercept from "@/services/intercept";
+import Loader from "@/pages/loader/Loader";
+import SseHandlerService from "@/services/sse/sse-handler-service";
+import config from "@/config/config";
 
 export default {
   components: {
@@ -31,17 +35,20 @@ export default {
 
   computed: {
     ...mapGetters({
-      currentUser: 'auth/getUser',
-      loggedIn: 'auth/getIsLoggedIn',
-      isConfirmed: 'auth/getIsConfirmed',
-      appReady: 'initApp/getIsAppReady',
+      currentUser: "auth/getUser",
+      loggedIn: "auth/getIsLoggedIn",
+      isConfirmed: "auth/getIsConfirmed",
+      appReady: "initApp/getIsAppReady",
     }),
 
     layout() {
       return (
-        (this.appReady ? this.$route.meta.layout || 'default' : 'nonav') +
-        '-layout'
+        (this.appReady ? this.$route.meta.layout || "default" : "nonav") +
+        "-layout"
       );
+    },
+    siteDisabled() {
+      return config.SITE_DISABLED;
     },
   },
 
@@ -50,7 +57,7 @@ export default {
       handler(isLoggedIn) {
         if (!isLoggedIn) {
           SseHandlerService.close();
-          this.$router.push('/login');
+          this.$router.push("/login");
         } else if (this.appReady && isLoggedIn) {
           SseHandlerService.init();
         }

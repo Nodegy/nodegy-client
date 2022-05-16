@@ -1,3 +1,5 @@
+import config from "@/config/config";
+
 export default class Webhook {
     constructor(_id, conditions, eid, symbol) {
         this._id = _id;
@@ -7,7 +9,7 @@ export default class Webhook {
     };
 
     getEndpoint() {
-        return process.env.VUE_APP_API_URL + "wh/" + this.eid;
+        return config.API_URL + "wh/" + this.eid;
     };
 
     getPayload() {

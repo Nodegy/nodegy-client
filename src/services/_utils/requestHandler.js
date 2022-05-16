@@ -1,7 +1,8 @@
 import axios from 'axios';
 import errorHandler from './errorHandler';
 import requestResponseHandler from './request-response-handler/requestResponseHandler';
-const API_URL = process.env.VUE_APP_API_URL;
+import config from "@/config/config";
+const API_URL = config.API_URL;
 
 const handleRequest = async (service, requestType, address, payload) => {
     payload = payload ? payload : {};
@@ -58,7 +59,7 @@ const handleNetworkError = async (requestType, address, payload) => {
 
     let attempts = 0;
     let res;
-    const maxAttempts = parseInt(process.env.VUE_APP_REQUEST_RETRIES);
+    const maxAttempts = config.REQUEST_RETRIES;
 
     while (attempts < maxAttempts) {
         await sleep(2000);

@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-/dist
 
 # To Do file:
 todo.txt
@@ -24,3 +23,8 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# api url
+api-url.js
+# Local Netlify folder
+.netlify

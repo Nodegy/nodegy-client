@@ -1,7 +1,8 @@
 import axios from 'axios';
 import store from '@/store/index.js';
 import Preferences from '@/models/preferences';
-const API_URL = process.env.VUE_APP_API_URL + 'auth/';
+import config from "@/config/config";
+const API_URL = config.API_URL + 'auth/';
 import { errorHandler } from '@/services/_utils/index';
 
 class AuthService {

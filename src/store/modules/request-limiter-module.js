@@ -1,5 +1,6 @@
-const cycleInSeconds = process.env.VUE_APP_SECONDS_CYCLE;
-const maxRequestsPerCycle = process.env.VUE_APP_REQUEST_LIMIT_PER_CYCLE;
+import config from "@/config/config";
+const cycleInSeconds = config.SECONDS_CYCLE;
+const maxRequestsPerCycle = config.LIMIT_PER_CYCLE;
 
 export const requestLimiter = {
     namespaced: true,
