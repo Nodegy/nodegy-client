@@ -1,10 +1,8 @@
-import axios from 'axios';
+import axios from '@/axios';
 import errorHandler from './errorHandler';
 import requestResponseHandler from './request-response-handler/requestResponseHandler';
 import config from "@/config/config";
 const API_URL = config.API_URL;
-
-axios.defaults.withCredentials = true;
 
 const handleRequest = async (service, requestType, address, payload) => {
     payload = payload ? payload : {};
@@ -25,7 +23,7 @@ const handleRequest = async (service, requestType, address, payload) => {
         switch (requestType) {
             case 'create':
             case 'post':
-                res = await axios.post(requestAddress, payload);
+                res = await axios.post(requestAddress, payload, { withCredentials: true });
                 break;
             case 'delete':
             case 'deleteone':
