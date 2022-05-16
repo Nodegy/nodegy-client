@@ -4,6 +4,8 @@ import requestResponseHandler from './request-response-handler/requestResponseHa
 import config from "@/config/config";
 const API_URL = config.API_URL;
 
+axios.defaults.withCredentials = true;
+
 const handleRequest = async (service, requestType, address, payload) => {
     payload = payload ? payload : {};
     let requestAddress;
@@ -23,21 +25,21 @@ const handleRequest = async (service, requestType, address, payload) => {
         switch (requestType) {
             case 'create':
             case 'post':
-                res = await axios.post(requestAddress, payload, { withCredentials: true });
+                res = await axios.post(requestAddress, payload);
                 break;
             case 'delete':
             case 'deleteone':
             case 'deleteall':
-                res = await axios.delete(requestAddress, { withCredentials: true });
+                res = await axios.delete(requestAddress);
                 break;
             case 'get':
-                res = await axios.get(requestAddress, payload, { withCredentials: true });
+                res = await axios.get(requestAddress, payload);
                 break;
             case 'patch':
             case 'update':
             case 'updateactivedata':
             case 'verify':
-                res = await axios.patch(requestAddress, payload, { withCredentials: true });
+                res = await axios.patch(requestAddress, payload);
                 break;
             default:
                 await errorHandler(service, 'handleRequest', 'invalid request type');
