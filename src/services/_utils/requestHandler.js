@@ -23,21 +23,21 @@ const handleRequest = async (service, requestType, address, payload) => {
         switch (requestType) {
             case 'create':
             case 'post':
-                res = await axios.post(requestAddress, payload);
+                res = await axios.post(requestAddress, payload, { withCredentials: true });
                 break;
             case 'delete':
             case 'deleteone':
             case 'deleteall':
-                res = await axios.delete(requestAddress);
+                res = await axios.delete(requestAddress, { withCredentials: true });
                 break;
             case 'get':
-                res = await axios.get(requestAddress, payload);
+                res = await axios.get(requestAddress, payload, { withCredentials: true });
                 break;
             case 'patch':
             case 'update':
             case 'updateactivedata':
             case 'verify':
-                res = await axios.patch(requestAddress, payload);
+                res = await axios.patch(requestAddress, payload, { withCredentials: true });
                 break;
             default:
                 await errorHandler(service, 'handleRequest', 'invalid request type');
