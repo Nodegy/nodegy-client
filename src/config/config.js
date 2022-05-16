@@ -1,7 +1,7 @@
 import API_URL from './api-url';
 
 export default {
-    SITE_DISABLED: true,
+    SITE_DISABLED: false,
     NODEGY_CONTACT_EMAIL: 'nodegytrading@gmail.com',
     NODEGY_DISCORD_INVITE: 'https://discord.gg/yTSmNm9puF',
     ALLOW_SIGNUPS: false,
