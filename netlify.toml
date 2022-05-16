@@ -2,3 +2,10 @@
   from = "/*"
   to = "/"
   status = 200
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://www.nodegy-api.com"
+  status = 200
+
+  
