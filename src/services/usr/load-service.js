@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '@/axios';
 import store from '@/store/index';
 import config from "@/config/config";
 const API_URL = config.API_URL + 'usr/load/';

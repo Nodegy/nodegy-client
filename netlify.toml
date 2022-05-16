@@ -6,6 +6,4 @@
 [[redirects]]
   from = "/api/*"
   to = "https://www.nodegy-api.com:splat"
-  status = 200
-
-  
+  status = 301
