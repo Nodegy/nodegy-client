@@ -16,13 +16,13 @@ const routes = [
         icon: 'pe-7s-graph3',
         component: () => import('@/pages/dashboard/user/strategy/Strategy.vue')
     },
-    {
-        path: '/papertrading',
-        name: 'papertrading',
-        title: 'Paper trading',
-        icon: 'pe-7s-graph1',
-        component: () => import('@/pages/dashboard/user/PaperTrading.vue')
-    },
+    // {
+    //     path: '/papertrading',
+    //     name: 'papertrading',
+    //     title: 'Paper trading',
+    //     icon: 'pe-7s-graph1',
+    //     component: () => import('@/pages/dashboard/user/PaperTrading.vue')
+    // },
     {
         path: '/feedback',
         name: 'feedback',
