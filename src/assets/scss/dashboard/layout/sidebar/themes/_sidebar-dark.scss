@@ -10,10 +10,6 @@
       background: rgba(0, 0, 0, .1) !important;
     }
 
-    .logo-src {
-      // background: url('/src/assets/images/logo-inverse.png');
-    }
-
     .hamburger-inner,
     .hamburger-inner::before,
     .hamburger-inner::after {
@@ -21,6 +17,7 @@
     }
 
     .hamburger-box:hover {
+
       .hamburger-inner,
       .hamburger-inner::before,
       .hamburger-inner::after {
@@ -43,7 +40,7 @@
       }
 
       & .vsm-item.active-item {
-        & > .vsm-link {
+        &>.vsm-link {
           @extend %side-link-hover;
         }
       }
@@ -70,16 +67,16 @@
       }
     }
 
-    .ps > .ps__scrollbar-y-rail > .ps__scrollbar-y {
+    .ps>.ps__scrollbar-y-rail>.ps__scrollbar-y {
       background: rgba(0, 0, 0, 0.35);
     }
 
-    .ps.ps--in-scrolling.ps--y:hover > .ps__scrollbar-y-rail,
-    .ps.ps--in-scrolling.ps--y > .ps__scrollbar-y-rail,
-    .ps:hover > .ps__scrollbar-y-rail:hover {
+    .ps.ps--in-scrolling.ps--y:hover>.ps__scrollbar-y-rail,
+    .ps.ps--in-scrolling.ps--y>.ps__scrollbar-y-rail,
+    .ps:hover>.ps__scrollbar-y-rail:hover {
       background-color: rgba(0, 0, 0, .1) !important;
 
-      & > .ps__scrollbar-y {
+      &>.ps__scrollbar-y {
         background-color: rgba(0, 0, 0, .25) !important;
       }
     }

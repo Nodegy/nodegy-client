@@ -2,7 +2,7 @@
   <div class="page-header clear-filter">
     <div
       class="page-header-image"
-      style="background-image: url('img/login.jfif')"
+      style="background-image: url('img/login/login.jfif')"
     ></div>
 
     <div class="container">

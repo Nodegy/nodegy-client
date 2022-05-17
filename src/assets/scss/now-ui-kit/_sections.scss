@@ -1,5 +1,4 @@
 .section {
-    // position: relative;
     background: $white-color;
 
     .row+.category {
@@ -14,7 +13,6 @@
     background-repeat: no-repeat;
     min-height: 80vh;
 }
-
 
 .page-header {
     min-height: 100vh;
