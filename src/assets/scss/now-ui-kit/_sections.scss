@@ -83,11 +83,13 @@ $ld-item-height: 275px !default;
 .section-description {
     padding: 125px 0;
     height: 95vh;
-    width: 95vw;
-    margin: 0 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media(max-width: 799px) {
+        margin: 0 25px;
+    }
 
     .section-description-image {
         width: 100%;
