@@ -145,7 +145,6 @@ export default {
           }
         }
       } catch (err) {
-        console.log("err: ", err.response.status);
         const status = err.response.status;
         let msg;
         if (status === 401) {

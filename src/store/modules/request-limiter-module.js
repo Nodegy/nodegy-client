@@ -1,6 +1,6 @@
 import config from "@/config/config";
 const cycleInSeconds = config.SECONDS_CYCLE;
-const maxRequestsPerCycle = config.LIMIT_PER_CYCLE;
+const maxRequestsPerCycle = config.REQUEST_LIMIT_PER_CYCLE;
 
 export const requestLimiter = {
     namespaced: true,
