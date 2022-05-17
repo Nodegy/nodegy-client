@@ -122,10 +122,13 @@ export default {
 
   methods: {
     async handleLogin() {
-      try {
-        this.showErrors = true;
-        this.loading = true;
+      if (this.loading) {
+        return;
+      }
+      this.showErrors = true;
+      this.loading = true;
 
+      try {
         const isValid = await this.$refs.observer.validate();
         if (!isValid) {
           this.loading = false;
