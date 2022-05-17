@@ -37,9 +37,8 @@
               <div v-if="showSignupWithKey" class="d-flex mx-auto text-center">
                 <p v-if="!hasBetaKey" class="ml-5">have beta key?</p>
                 <a
-                  type="button"
                   :class="hasBetaKey ? 'mx-auto' : 'ml-2'"
-                  style="color: blue"
+                  style="color: blue; cursor: pointer"
                   @click.prevent="toggleHasBetaKey"
                 >
                   {{ hasBetaKey ? "Cancel" : "Signup with Key" }}
