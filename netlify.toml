@@ -4,7 +4,7 @@
   status = 200
 
 [[redirects]]
-  from = "/api/*"
+  from = "https://www.nodegy.com/api/*"
   to = "https://www.nodegy-api.com/:splat"
   status = 200
   force = true
