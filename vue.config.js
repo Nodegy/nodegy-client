@@ -10,6 +10,5 @@ module.exports = {
     productionSourceMap: false,
     css: {
         sourceMap: process.env.NODE_ENV !== 'production'
-    }
-
+    },
 };
