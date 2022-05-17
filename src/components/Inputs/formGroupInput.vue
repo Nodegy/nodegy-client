@@ -29,6 +29,7 @@
           class="form-control"
           :class="[{ valid: value && !error }, inputClasses]"
           aria-describedby="addon-right addon-left"
+          @keydown.enter.prevent="onEnter"
         />
       </slot>
       <slot name="addonRight">
@@ -107,6 +108,9 @@ export default {
     onBlur(value) {
       this.focused = false;
       this.$emit("blur", value);
+    },
+    onEnter() {
+      this.$emit("enter");
     },
   },
 };

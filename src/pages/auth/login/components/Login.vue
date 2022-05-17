@@ -1,6 +1,10 @@
 <template>
   <ValidationObserver ref="observer" v-slot="{ invalid }">
-    <ValidationProvider name="Email or Username" rules="required|min:3">
+    <ValidationProvider
+      name="Email or Username"
+      rules="required|min:3"
+      v-slot="{ errors }"
+    >
       <fg-input
         type="text"
         v-model="user.username"
@@ -8,13 +12,20 @@
         addon-left-icon="pe-7s-user"
         placeholder="Email or Username"
         autofocus
-        :disabled="loading"
+        v-on:enter="handleLogin"
       />
       <b-form-invalid-feedback class="auth-invalid-feedback" :state="false">
+        <span v-if="showErrors">
+          {{ errors[0] }}
+        </span>
       </b-form-invalid-feedback>
     </ValidationProvider>
 
-    <ValidationProvider name="Password" rules="required|min:6">
+    <ValidationProvider
+      name="Password"
+      rules="required|min:6"
+      v-slot="{ errors }"
+    >
       <fg-input
         type="password"
         v-model="user.password"
@@ -22,9 +33,12 @@
         addon-left-icon="pe-7s-lock"
         placeholder="Password"
         :state="null"
-        :disabled="loading"
+        v-on:enter="handleLogin"
       />
       <b-form-invalid-feedback class="auth-invalid-feedback" :state="false">
+        <span v-if="showErrors">
+          {{ errors[0] }}
+        </span>
       </b-form-invalid-feedback>
     </ValidationProvider>
     <b-form-checkbox
@@ -78,6 +92,7 @@ export default {
       loading: false,
       message: null,
       saveUsername: false,
+      showErrors: false,
     };
   },
 
@@ -108,6 +123,7 @@ export default {
   methods: {
     async handleLogin() {
       try {
+        this.showErrors = true;
         this.loading = true;
 
         const isValid = await this.$refs.observer.validate();
@@ -129,8 +145,16 @@ export default {
           }
         }
       } catch (err) {
+        const status = err.response.status;
+        let msg;
+        if (status === 401) {
+          msg = "Invalid Password";
+        } else if (status === 404) {
+          msg = "User doesn't exist";
+        } else {
+          err.response.data.message || err.message || err.toString();
+        }
         this.loading = false;
-        const msg = err.response.data.message || err.message || err.toString();
         this.$emit("setMsg", { msg: msg, isErr: true });
       }
     },

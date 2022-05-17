@@ -8,6 +8,6 @@ export default {
     REQUEST_RETRIES: 2,
     LOG_ERRORS_TO_DB: false,
     SECONDS_CYCLE: 10,
-    VUE_APP_REQUEST_LIMIT_PER_CYCLE: 5,
+    REQUEST_LIMIT_PER_CYCLE: 5,
     API_URL: API_URL
 };
