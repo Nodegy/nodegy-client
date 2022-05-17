@@ -8,6 +8,7 @@
         addon-left-icon="pe-7s-user"
         placeholder="Email or Username"
         autofocus
+        :disabled="loading"
       />
       <b-form-invalid-feedback class="auth-invalid-feedback" :state="false">
       </b-form-invalid-feedback>
@@ -21,6 +22,7 @@
         addon-left-icon="pe-7s-lock"
         placeholder="Password"
         :state="null"
+        :disabled="loading"
       />
       <b-form-invalid-feedback class="auth-invalid-feedback" :state="false">
       </b-form-invalid-feedback>
@@ -40,7 +42,10 @@
       variant="primary"
       @click.prevent="handleLogin"
     >
-      Login
+      <template v-if="loading">
+        <b-spinner small />
+      </template>
+      <template v-else> Login </template>
     </b-button>
   </ValidationObserver>
 </template>
@@ -49,7 +54,12 @@
 import User from "@/models/user";
 import AuthService from "@/services/auth/auth-service";
 import { FormGroupInput } from "@/components";
-import { BButton, BFormInvalidFeedback, BFormCheckbox } from "bootstrap-vue";
+import {
+  BButton,
+  BFormInvalidFeedback,
+  BFormCheckbox,
+  BSpinner,
+} from "bootstrap-vue";
 import { mapGetters } from "vuex";
 
 export default {
@@ -58,6 +68,7 @@ export default {
     "b-button": BButton,
     "b-form-checkbox": BFormCheckbox,
     "b-form-invalid-feedback": BFormInvalidFeedback,
+    "b-spinner": BSpinner,
     [FormGroupInput.name]: FormGroupInput,
   },
 
@@ -90,7 +101,7 @@ export default {
   created() {
     if (this.loggedIn && this.isConfirmed) {
       const username = this.$store.state.auth.user.username;
-      this.$router.push(`/dashboard/${username}/profile`);
+      this.$router.push(`/dashboard/${username}/strategy`);
     }
   },
 

@@ -4,9 +4,7 @@
     filter-color="filter"
     style="margin: -32px -32px 0 -32px"
   >
-    <parallax class="page-header-image test-bg"> </parallax>
-
-    <parallax class="page-header-image profile-bg-image"> </parallax>
+    <div class="page-header-image profile-bg-image"></div>
 
     <b-container style="color: black" class="profile">
       <ErrorOverlay :isErr="isResErr" v-on:close="isResErr = false">
@@ -325,6 +323,6 @@ export default {
 
 <style >
 .profile-bg-image {
-  background-image: url("../../../../assets/images/profile/chart-b-w.jpeg");
+  background-image: url("../../../../assets/images/profile/profile.jpeg");
 }
 </style>
