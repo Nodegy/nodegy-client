@@ -35,7 +35,15 @@
           Sign Up
         </router-link>
       </li>
-      <RouteComponent linkName="login" label="Login" />
+      <li
+        v-bind:class="[
+          this.$route.name == 'login' ? 'nav-item active' : 'nav-item',
+        ]"
+      >
+        <router-link class="nav-link" :to="{ name: 'login' }">
+          Login
+        </router-link>
+      </li>
     </template>
   </navbar>
 </template>
@@ -43,7 +51,6 @@
 <script>
 import { mapGetters } from "vuex";
 import { DropDown, Navbar, NavLink } from "@/components";
-import RouteComponent from "@/layout-landing/components/RouteLinks";
 
 export default {
   name: "main-navbar",
@@ -53,7 +60,6 @@ export default {
   },
   components: {
     Navbar,
-    RouteComponent,
   },
 
   methods: {

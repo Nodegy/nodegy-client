@@ -23,7 +23,6 @@
           />
           <div class="d-flex justify-content-center">
             <h3
-              type="button"
               @click.prevent="scrollToElem('section-description')"
               class="m-3 hover"
             >
@@ -31,14 +30,12 @@
             </h3>
 
             <h3
-              type="button"
               @click.prevent="scrollToElem('section-description')"
               class="m-3 hover"
             >
               Automate.
             </h3>
             <h3
-              type="button"
               @click.prevent="scrollToElem('section-description')"
               class="m-3 hover"
             >
