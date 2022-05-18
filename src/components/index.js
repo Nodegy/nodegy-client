@@ -11,6 +11,7 @@ import Pagination from './Pagination.vue';
 import Parallax from './Parallax.vue';
 import RequestLimiterButton from './buttons/RequestLimiterButton.vue';
 import RequestResponseArea from './RequestResponseArea.vue';
+import VersionBadge from './VersionBadge.vue';
 
 export {
   Card,
@@ -25,5 +26,6 @@ export {
   Pagination,
   Parallax,
   RequestLimiterButton,
-  RequestResponseArea
+  RequestResponseArea,
+  VersionBadge
 };

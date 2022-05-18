@@ -1,4 +1,4 @@
-import API_URL from './api-url';
+import { API_URL, DEPLOY_ENV } from './deploy-config';
 
 export default {
     SITE_DISABLED: false,
@@ -9,5 +9,6 @@ export default {
     LOG_ERRORS_TO_DB: false,
     SECONDS_CYCLE: 10,
     REQUEST_LIMIT_PER_CYCLE: 5,
-    API_URL: API_URL
+    API_URL: API_URL,
+    DEPLOY_ENV: DEPLOY_ENV
 };
