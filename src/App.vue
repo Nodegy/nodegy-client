@@ -17,6 +17,7 @@
         </component>
       </template>
     </template>
+    <version-badge />
   </div>
 </template>
 
@@ -27,10 +28,12 @@ import intercept from "@/services/intercept";
 import Loader from "@/pages/loader/Loader";
 import SseHandlerService from "@/services/sse/sse-handler-service";
 import config from "@/config/config";
+import { VersionBadge } from "@/components";
 
 export default {
   components: {
     Loader,
+    VersionBadge,
   },
 
   computed: {
@@ -51,7 +54,6 @@ export default {
       return config.SITE_DISABLED;
     },
   },
-
   watch: {
     loggedIn: {
       handler(isLoggedIn) {
