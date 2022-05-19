@@ -67,6 +67,29 @@ class AdmSignupKeysService {
         }
     };
 
+    async sendSignupKey(_id, email, key) {
+        const payload = {
+            _id: _id,
+            email: email,
+            key: key
+        };
+        try {
+            const res = await requestHandler(
+                service,
+                'patch',
+                address + 'send',
+                payload
+            );
+
+            if (res) {
+                await store.dispatch('signupKeys/add', res.data.payload);
+            };
+        } catch (err) {
+            await errorHandler(service, 'send', err);
+            return Promise.reject(err);
+        }
+    };
+
 };
 
 export default new AdmSignupKeysService();

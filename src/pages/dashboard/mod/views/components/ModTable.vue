@@ -170,6 +170,9 @@ export default {
         this.$emit("delete", this.selected);
       }
     },
+    onGetSelected() {
+      return this.selected.length ? this.selected[0] : null;
+    },
   },
 };
 </script>

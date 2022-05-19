@@ -13,15 +13,32 @@
         <span> Generate Signup Keys: </span>
         <div style="width: 400px" class="d-flex">
           <b-form-input
-            v-model="numKeysToGenerate"
+            v-model="form.numKeysToGenerate"
             placeholder="# keys to generate"
           />
           <b-button
-            :disabled="!numKeysToGenerate"
+            :disabled="!form.numKeysToGenerate || loading"
             size="sm"
             @click.prevent="generateSignupKeys"
           >
             Submit
+          </b-button>
+        </div>
+      </div>
+
+      <div class="text-left" style="max-width: 400px">
+        <span> Send Signup Key: </span>
+        <div style="width: 400px" class="d-flex">
+          <b-form-input
+            v-model="form.sendToEmail"
+            placeholder="email address"
+          />
+          <b-button
+            :disabled="!form.sendToEmail || loading"
+            size="sm"
+            @click.prevent="sendSignupKey"
+          >
+            Send
           </b-button>
         </div>
       </div>
@@ -44,12 +61,18 @@ export default {
   },
   data() {
     return {
+      loading: false,
       fields: [
         "key",
+        { key: "isAvailable", sortable: true },
         { key: "isUsed", sortable: true },
         { key: "createdAt", sortable: true },
       ],
-      numKeysToGenerate: null,
+      form: {
+        numKeysToGenerate: null,
+        sendToEmail: null,
+      },
+      selected: null,
     };
   },
 
@@ -76,22 +99,41 @@ export default {
     },
 
     async onDelete(selected) {
+      this.loading = true;
       let deleteIds = selected.map((key) => key._id);
       const confirm = await AdmSignupKeysService.delete(deleteIds);
-      if (confirm) {
+      if (confirm && this.signupKeys.length > 0) {
         this.$refs.manageSignupKeysModTable.clearSelected();
       }
+      this.loading = false;
     },
 
     async generateSignupKeys() {
+      this.loading = true;
       let numKeys;
-      if (this.numKeysToGenerate) {
-        numKeys = parseInt(this.numKeysToGenerate);
+      if (this.form.numKeysToGenerate) {
+        numKeys = parseInt(this.form.numKeysToGenerate);
       }
 
       if (numKeys) {
         const confirm = await AdmSignupKeysService.generateSignupKeys(numKeys);
       }
+      this.loading = false;
+    },
+
+    async sendSignupKey() {
+      this.loading = true;
+      if (this.form.sendToEmail) {
+        const selected = this.$refs.manageSignupKeysModTable.onGetSelected();
+        if (selected && selected.isAvailable) {
+          const returnedKey = await AdmSignupKeysService.sendSignupKey(
+            selected._id,
+            this.form.sendToEmail,
+            selected.key
+          );
+        }
+      }
+      this.loading = false;
     },
   },
 };
