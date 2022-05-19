@@ -136,6 +136,7 @@ export default {
         }
       } catch (err) {
         const msg =
+          err.response.data.message ||
           "An error occured during signup.  Please refresh the page and try again, or contact support if the issue persists.";
         this.$emit("setMsg", {
           success: false,
