@@ -4,8 +4,8 @@ import { errorHandler } from '@/services/_utils/index';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
-    ? { status: { loggedIn: user.roles.includes('isConfirmed') }, user }
-    : { status: { loggedIn: false }, user: null };
+    ? { status: { loggedIn: true, waitingVerification: false }, user: user }
+    : { status: { loggedIn: false, waitingVerification: false }, user: null, };
 
 export const auth = {
     namespaced: true,
@@ -26,16 +26,16 @@ export const auth = {
             commit('logout');
         },
 
-        async register({ commit }, user) {
+        async register({ commit }, { user, signupKey }) {
             try {
-                const res = await AuthService.register(user);
+                const res = await AuthService.register(user, signupKey);
                 if (res) {
                     if (Object.keys(res).includes('isAxiosError') && res.isAxiosError) {
                         errorHandler('Auth-module', 'register', res);
                         return Promise.reject(res);
                     } else {
-                        commit('loginSuccess', res.user);
-                        localStorage.setItem('user', JSON.stringify(res.user));
+                        commit('setWaitingVerification', true);
+                        commit('onSetUser', { ...user, signupKey: signupKey, roles: [] });
                         return Promise.resolve(res);
                     };
                 };
@@ -44,12 +44,6 @@ export const auth = {
                 errorHandler('Auth-module', 'register', err);
                 return Promise.reject(err);
             };
-        },
-
-        confirmSuccess({ commit }, roles) {
-            updateLSObj('user', 'roles', roles);
-            commit('setRoles', roles);
-            commit('onSetLogin', true);
         },
 
         updateUserName({ commit }, updatedUserName) {
@@ -61,6 +55,13 @@ export const auth = {
             commit('setUserEmail', updatedEmail);
             updateLSObj('user', 'email', updatedEmail);
         },
+
+        setUser({ commit }, user) {
+            commit('onSetUser', user)
+        },
+        cancelWaitingVerification({ commit }) {
+            commit('setWaitingVerification', false);
+        }
 
         // updateRoles({ commit }, roles) {
         //     updateLSObj('user', 'roles', roles)
@@ -74,7 +75,11 @@ export const auth = {
         },
         loginSuccess(state, user) {
             state.user = user;
-            state.status.loggedIn = state.user.roles.includes('isConfirmed');
+            state.status.loggedIn = true;
+            if (state.status.waitingVerification) {
+                state.status.waitingVerification = false;
+            }
+
         },
         loginFailure(state) {
             state.status.loggedIn = false;
@@ -92,18 +97,21 @@ export const auth = {
         },
         setRoles(state, roles) {
             state.user.roles = roles;
-        }
+        },
+        onSetUser(state, user) {
+            state.user = user;
+        },
+        setWaitingVerification(state, isWaiting) {
+            state.status.waitingVerification = isWaiting;
+        },
     },
 
     getters: {
-        getIsConfirmed: state => {
-            return state.user ? Object.keys(state.user).includes('roles') && state.user.roles.includes('isConfirmed') : false;
-        },
-        getNeedsConfirmation: state => {
-            return state.user ? Object.keys(state.user).includes('roles') && !state.user.roles.includes('isConfirmed') : false;
-        },
         getIsLoggedIn: state => {
             return state.status.loggedIn;
+        },
+        getIsWaitingVerification: state => {
+            return state.status.waitingVerification;
         },
         getUser: state => {
             return state.user;

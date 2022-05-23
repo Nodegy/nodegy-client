@@ -84,7 +84,6 @@
 import User from "@/models/user";
 import { FormGroupInput, RequestLimiterButton } from "@/components";
 import { BFormInvalidFeedback } from "bootstrap-vue";
-import { getTimezone } from "@/helpers/index";
 import { errorHandler } from "@/services/_utils/index";
 import Preferences from "@/models/preferences";
 import config from "@/config/config";
@@ -108,7 +107,7 @@ export default {
       },
       loading: false,
       successful: false,
-      user: new User("", "", "", "", ""),
+      user: new User("", "", ""),
     };
   },
 
@@ -120,18 +119,13 @@ export default {
       if (!isValid) {
         return;
       }
-      this.user.timezone = getTimezone();
-
-      const signupsAllowed = config.ALLOW_SIGNUPS;
-      if (!signupsAllowed) {
-        this.user.key = this.signupKey;
-      }
-
       try {
-        const res = await this.$store.dispatch("auth/register", this.user);
-        if (res && !res.isAxiosError) {
+        const res = await this.$store.dispatch("auth/register", {
+          user: this.user,
+          signupKey: this.signupKey,
+        });
+        if (res) {
           this.successful = true;
-          this.$store.dispatch("prefs/init", res.preferences);
           this.$router.push("/login").catch(() => {});
         }
       } catch (err) {

@@ -1,10 +1,11 @@
 <template>
   <ValidationObserver ref="observer" v-slot="{ invalid }">
     <template v-if="!resendCode">
-      <div>
+      <div class="pb-2">
+        <h6 style="color: red">do not refresh page</h6>
         <h5>
           Please provide the verification code that was sent to your email
-          address.
+          address to finish setting up your account.
         </h5>
       </div>
 
@@ -45,7 +46,7 @@
         </h6>
         <h6>
           <a
-            @click.prevent="logOut"
+            @click.prevent="onCancel"
             style="color: #00ffff"
             class="btn bg-transparent link td-hover"
             >Cancel</a
@@ -101,8 +102,10 @@
 <script>
 import AuthService from "@/services/auth/auth-service";
 import EmailService from "@/services/auth/email-service";
+import { getTimezone } from "@/helpers/index";
 import { RequestLimiterButton } from "@/components";
 import { BFormInvalidFeedback, BFormInput } from "bootstrap-vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "confirm-account",
@@ -123,35 +126,52 @@ export default {
   },
 
   computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
+    ...mapGetters({
+      currentUser: "auth/getUser",
+    }),
   },
 
   methods: {
     async onConfirm() {
       this.loading = true;
+      let confirm;
+      let username;
       try {
         const isValid = await this.$refs.observer.validate();
 
         if (!isValid) {
           return;
         }
-        const roles = this.currentUser.roles;
-        const confirm = await AuthService.confirm(roles, this.vCode);
 
-        if (confirm) {
-          this.$store.dispatch("auth/confirmSuccess", confirm.data.payload);
-        }
+        username = this.currentUser.username;
+        const timezone = getTimezone();
+        confirm = await AuthService.confirm(
+          this.currentUser.email,
+          this.currentUser.signupKey,
+          timezone,
+          this.vCode
+        );
       } catch (err) {
         this.$emit("setMsg", { msg: "Invalid Code", isErr: true });
       } finally {
         this.loading = false;
       }
+
+      if (confirm) {
+        const login = await AuthService.login({
+          username: this.currentUser.email,
+          password: this.currentUser.password,
+        });
+        if (login) {
+          this.$nextTick(() => {
+            this.$router.push(`/dashboard/${username}/strategy`);
+          });
+        }
+      }
     },
 
-    logOut() {
-      this.$store.dispatch("auth/logout");
+    onCancel() {
+      this.$store.dispatch("auth/cancelWaitingVerification");
     },
 
     onShowSendNew() {

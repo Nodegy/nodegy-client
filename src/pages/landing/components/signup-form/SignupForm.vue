@@ -81,7 +81,7 @@ export default {
   }),
 
   mounted() {
-    this.signupsAllowed = config.ALLOW_SIGNUPS;
+    this.signupsAllowed = !config.REQUIRE_SIGNUP_KEY;
     if (!this.signupsAllowed) {
       this.showSignupWithKey = true;
     }

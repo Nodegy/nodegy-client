@@ -4,7 +4,7 @@ export default {
     SITE_DISABLED: false,
     NODEGY_CONTACT_EMAIL: 'nodegytrading@gmail.com',
     NODEGY_DISCORD_INVITE: 'https://discord.gg/yTSmNm9puF',
-    ALLOW_SIGNUPS: false,
+    REQUIRE_SIGNUP_KEY: true,
     REQUEST_RETRIES: 2,
     LOG_ERRORS_TO_DB: false,
     SECONDS_CYCLE: 10,

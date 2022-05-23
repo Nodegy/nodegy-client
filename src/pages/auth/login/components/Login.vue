@@ -105,16 +105,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      isConfirmed: "auth/getIsConfirmed",
-    }),
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
     },
   },
 
   created() {
-    if (this.loggedIn && this.isConfirmed) {
+    if (this.loggedIn) {
       const username = this.$store.state.auth.user.username;
       this.$router.push(`/dashboard/${username}/strategy`);
     }
