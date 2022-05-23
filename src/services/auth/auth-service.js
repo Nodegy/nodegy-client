@@ -3,6 +3,7 @@ import store from '@/store/index.js';
 import Preferences from '@/models/preferences';
 import config from "@/config/config";
 const API_URL = config.API_URL + 'auth/';
+const signupKeyRequired = config.REQUIRE_SIGNUP_KEY;
 import { errorHandler } from '@/services/_utils/index';
 
 class AuthService {
@@ -48,16 +49,11 @@ class AuthService {
                 username: user.username,
                 email: user.email,
                 password: user.password,
-                timezone: user.timezone,
             };
 
-            if (user.key) {
-                payload.key = user.key;
-            }
-
             const res = await axios.post(API_URL + 'signup', payload);
-            if (res) {
-                return res.data.payload;
+            if (res && !res.isAxiosError) {
+                return res;
             }
         } catch (err) {
             errorHandler('Auth-service', 'register', err);
@@ -65,12 +61,24 @@ class AuthService {
         };
     };
 
-    confirm(roles, vCode) {
-        return axios
-            .patch(API_URL + 'verification/confirmemail', {
-                roles: roles,
-                vCode: vCode,
-            }, { withCredentials: true });
+    async confirm(email, key, password, timezone, vCode) {
+        const payload = {
+            email: email,
+            timezone: timezone,
+            vCode: vCode,
+        };
+
+        if (signupKeyRequired) {
+            payload.key = key;
+        };
+
+        const res = await axios
+            .post(API_URL + 'confirm', payload);
+
+        if (res) {
+            await this.login({ username: email, password: password });
+            await store.dispatch("auth/confirmSuccess");
+        }
     };
 
     resetPw(email, vCode, password) {

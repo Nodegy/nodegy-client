@@ -11,7 +11,7 @@
           <div slot="header" class="logo-container">
             <img v-lazy="'img/logo/logo.png'" alt="" />
           </div>
-          <ConfirmAccount v-if="needsConfirmation" v-on:setMsg="setMsg" />
+          <ConfirmAccount v-if="waitingVerification" v-on:setMsg="setMsg" />
 
           <template v-else>
             <Login v-if="!showVerify" v-on:setMsg="setMsg" />
@@ -95,8 +95,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      isConfirmed: "auth/getIsConfirmed",
-      needsConfirmation: "auth/getNeedsConfirmation",
+      waitingVerification: "auth/getIsWaitingVerification",
     }),
   },
 

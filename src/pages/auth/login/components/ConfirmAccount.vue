@@ -1,10 +1,11 @@
 <template>
   <ValidationObserver ref="observer" v-slot="{ invalid }">
     <template v-if="!resendCode">
-      <div>
+      <div class="pb-2">
+        <h6 style="color: red">do not refresh page</h6>
         <h5>
           Please provide the verification code that was sent to your email
-          address.
+          address to finish setting up your account.
         </h5>
       </div>
 
@@ -101,8 +102,10 @@
 <script>
 import AuthService from "@/services/auth/auth-service";
 import EmailService from "@/services/auth/email-service";
+import { getTimezone } from "@/helpers/index";
 import { RequestLimiterButton } from "@/components";
 import { BFormInvalidFeedback, BFormInput } from "bootstrap-vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "confirm-account",
@@ -123,9 +126,9 @@ export default {
   },
 
   computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
+    ...mapGetters({
+      currentUser: "auth/getUser",
+    }),
   },
 
   methods: {
@@ -137,12 +140,15 @@ export default {
         if (!isValid) {
           return;
         }
-        const roles = this.currentUser.roles;
-        const confirm = await AuthService.confirm(roles, this.vCode);
 
-        if (confirm) {
-          this.$store.dispatch("auth/confirmSuccess", confirm.data.payload);
-        }
+        const timezone = getTimezone();
+        await AuthService.confirm(
+          this.currentUser.email,
+          this.currentUser.signupKey,
+          this.currentUser.password,
+          timezone,
+          this.vCode
+        );
       } catch (err) {
         this.$emit("setMsg", { msg: "Invalid Code", isErr: true });
       } finally {

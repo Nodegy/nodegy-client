@@ -2,7 +2,7 @@
   <div id="app">
     <template v-if="siteDisabled">Under Construction</template>
     <template v-else>
-      <div v-if="!currentUser || !isConfirmed">
+      <div v-if="!currentUser">
         <router-view name="header" />
         <div class="wrapper">
           <router-view />
@@ -40,7 +40,6 @@ export default {
     ...mapGetters({
       currentUser: "auth/getUser",
       loggedIn: "auth/getIsLoggedIn",
-      isConfirmed: "auth/getIsConfirmed",
       appReady: "initApp/getIsAppReady",
     }),
 
