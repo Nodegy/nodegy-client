@@ -28,14 +28,14 @@ export const auth = {
 
         async register({ commit }, { user, signupKey }) {
             try {
-                const res = await AuthService.register(user);
+                const res = await AuthService.register(user, signupKey);
                 if (res) {
                     if (Object.keys(res).includes('isAxiosError') && res.isAxiosError) {
                         errorHandler('Auth-module', 'register', res);
                         return Promise.reject(res);
                     } else {
                         commit('setWaitingVerification', true);
-                        commit('setUser', { ...user, signupKey: signupKey });
+                        commit('onSetUser', { ...user, signupKey: signupKey, roles: [] });
                         return Promise.resolve(res);
                     };
                 };
@@ -44,10 +44,6 @@ export const auth = {
                 errorHandler('Auth-module', 'register', err);
                 return Promise.reject(err);
             };
-        },
-
-        confirmSuccess({ commit }) {
-            commit('setWaitingVerification', false);
         },
 
         updateUserName({ commit }, updatedUserName) {
@@ -59,6 +55,13 @@ export const auth = {
             commit('setUserEmail', updatedEmail);
             updateLSObj('user', 'email', updatedEmail);
         },
+
+        setUser({ commit }, user) {
+            commit('onSetUser', user)
+        },
+        cancelWaitingVerification({ commit }) {
+            commit('setWaitingVerification', false);
+        }
 
         // updateRoles({ commit }, roles) {
         //     updateLSObj('user', 'roles', roles)
@@ -73,6 +76,10 @@ export const auth = {
         loginSuccess(state, user) {
             state.user = user;
             state.status.loggedIn = true;
+            if (state.status.waitingVerification) {
+                state.status.waitingVerification = false;
+            }
+
         },
         loginFailure(state) {
             state.status.loggedIn = false;
@@ -91,7 +98,7 @@ export const auth = {
         setRoles(state, roles) {
             state.user.roles = roles;
         },
-        setUser(state, user) {
+        onSetUser(state, user) {
             state.user = user;
         },
         setWaitingVerification(state, isWaiting) {

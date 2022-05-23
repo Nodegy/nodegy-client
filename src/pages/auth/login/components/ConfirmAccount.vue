@@ -46,7 +46,7 @@
         </h6>
         <h6>
           <a
-            @click.prevent="logOut"
+            @click.prevent="onCancel"
             style="color: #00ffff"
             class="btn bg-transparent link td-hover"
             >Cancel</a
@@ -134,6 +134,8 @@ export default {
   methods: {
     async onConfirm() {
       this.loading = true;
+      let confirm;
+      let username;
       try {
         const isValid = await this.$refs.observer.validate();
 
@@ -141,11 +143,11 @@ export default {
           return;
         }
 
+        username = this.currentUser.username;
         const timezone = getTimezone();
-        await AuthService.confirm(
+        confirm = await AuthService.confirm(
           this.currentUser.email,
           this.currentUser.signupKey,
-          this.currentUser.password,
           timezone,
           this.vCode
         );
@@ -154,10 +156,22 @@ export default {
       } finally {
         this.loading = false;
       }
+
+      if (confirm) {
+        const login = await AuthService.login({
+          username: this.currentUser.email,
+          password: this.currentUser.password,
+        });
+        if (login) {
+          this.$nextTick(() => {
+            this.$router.push(`/dashboard/${username}/strategy`);
+          });
+        }
+      }
     },
 
-    logOut() {
-      this.$store.dispatch("auth/logout");
+    onCancel() {
+      this.$store.dispatch("auth/cancelWaitingVerification");
     },
 
     onShowSendNew() {

@@ -41,14 +41,16 @@ class AuthService {
     logout() {
         localStorage
             .removeItem('user');
+        store.dispatch('auth/setUser', null);
     };
 
-    async register(user) {
+    async register(user, signupKey) {
         try {
             const payload = {
-                username: user.username,
                 email: user.email,
+                key: signupKey,
                 password: user.password,
+                username: user.username,
             };
 
             const res = await axios.post(API_URL + 'signup', payload);
@@ -61,7 +63,7 @@ class AuthService {
         };
     };
 
-    async confirm(email, key, password, timezone, vCode) {
+    async confirm(email, key, timezone, vCode) {
         const payload = {
             email: email,
             timezone: timezone,
@@ -72,13 +74,8 @@ class AuthService {
             payload.key = key;
         };
 
-        const res = await axios
+        return await axios
             .post(API_URL + 'confirm', payload);
-
-        if (res) {
-            await this.login({ username: email, password: password });
-            await store.dispatch("auth/confirmSuccess");
-        }
     };
 
     resetPw(email, vCode, password) {
