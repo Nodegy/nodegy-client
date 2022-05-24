@@ -11,8 +11,7 @@
         class="no-border input-lg"
         addon-left-icon="pe-7s-user"
         placeholder="Email or Username"
-        autofocus
-        v-on:enter="handleLogin"
+        v-on:enter="$refs.loginButton.handleClick()"
       />
       <b-form-invalid-feedback class="auth-invalid-feedback" :state="false">
         <span v-if="showErrors">
@@ -33,7 +32,7 @@
         addon-left-icon="pe-7s-lock"
         placeholder="Password"
         :state="null"
-        v-on:enter="handleLogin"
+        v-on:enter="$refs.loginButton.handleClick()"
       />
       <b-form-invalid-feedback class="auth-invalid-feedback" :state="false">
         <span v-if="showErrors">
@@ -48,42 +47,35 @@
       @input="onSaveUn"
       >Save Email/Username</b-form-checkbox
     >
-    <b-button
-      block
+    <RequestLimiterButton
       :disabled="invalid"
-      type="submit"
-      pill
+      id="login-button-1"
+      v-on:click="handleLogin"
+      rounded
+      :isBlock="true"
+      :loading="loading"
       variant="primary"
-      @click.prevent="handleLogin"
+      ref="loginButton"
     >
-      <template v-if="loading">
-        <b-spinner small />
-      </template>
-      <template v-else> Login </template>
-    </b-button>
+      Login
+    </RequestLimiterButton>
   </ValidationObserver>
 </template>
 
 <script>
 import User from "@/models/user";
 import AuthService from "@/services/auth/auth-service";
-import { FormGroupInput } from "@/components";
-import {
-  BButton,
-  BFormInvalidFeedback,
-  BFormCheckbox,
-  BSpinner,
-} from "bootstrap-vue";
+import { FormGroupInput, RequestLimiterButton } from "@/components";
+import { BFormInvalidFeedback, BFormCheckbox } from "bootstrap-vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "LoginWindow",
   components: {
-    "b-button": BButton,
     "b-form-checkbox": BFormCheckbox,
     "b-form-invalid-feedback": BFormInvalidFeedback,
-    "b-spinner": BSpinner,
     [FormGroupInput.name]: FormGroupInput,
+    RequestLimiterButton,
   },
 
   data() {

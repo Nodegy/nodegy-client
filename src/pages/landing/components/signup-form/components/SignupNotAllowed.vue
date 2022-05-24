@@ -17,6 +17,7 @@
           type="email"
           placeholder="email"
           addon-left-icon="pe-7s-mail"
+          v-on:enter="$refs.joinMailingListButton.handleClick()"
         />
         <b-form-invalid-feedback class="signup-invalid-feedback" :state="false">
           {{ errors[0] }}
@@ -25,13 +26,13 @@
 
       <div class="text-center">
         <RequestLimiterButton
-          v-if="!hasBetaKey"
           :disabled="invalid"
           id="join-mailing-list-button"
           v-on:click="addToMailingList"
           inputStyle="background-color: #ffffff; color: #00838F"
           rounded
           :loading="loading"
+          ref="joinMailingListButton"
         >
           Join Mailing List!
         </RequestLimiterButton>
@@ -52,6 +53,7 @@
           type="text"
           placeholder="key"
           addon-left-icon="pe-7s-key"
+          v-on:enter="$refs.signupKeyButton.handleClick()"
         />
         <b-form-invalid-feedback class="signup-invalid-feedback" :state="false">
           {{ errors[0] }}
@@ -67,6 +69,7 @@
           size="lg"
           rounded
           :loading="loading"
+          ref="signupKeyButton"
         >
           Sumbit
         </RequestLimiterButton>
@@ -108,6 +111,11 @@ export default {
     async addToMailingList() {
       this.loading = true;
       try {
+        const isValid = await this.$refs.observer.validate();
+        if (!isValid) {
+          this.loading = false;
+          return;
+        }
         const confirm = await MailingListService.add(this.form.email);
         if (confirm) {
           this.$emit("setMsg", {
@@ -129,6 +137,11 @@ export default {
     async handleSignupKey() {
       this.loading = true;
       try {
+        const isValid = await this.$refs.observer.validate();
+        if (!isValid) {
+          this.loading = false;
+          return;
+        }
         const verified = await SignupKeysService.verifySignupKey(
           this.form.signupKey
         );
