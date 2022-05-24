@@ -42,7 +42,6 @@ class AuthService {
             .removeItem('user');
         localStorage
             .removeItem('prefs');
-        // store.dispatch('auth/setUser', null);
         process.nextTick(() => {
             window.location.reload();
         })

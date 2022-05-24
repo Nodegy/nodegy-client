@@ -30,6 +30,7 @@
           :class="[{ valid: value && !error }, inputClasses]"
           aria-describedby="addon-right addon-left"
           @keydown.enter.prevent="onEnter"
+          spellcheck="false"
         />
       </slot>
       <slot name="addonRight">

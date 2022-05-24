@@ -59,6 +59,7 @@
         type="password"
         placeholder="Confirm Password"
         addon-left-icon="pe-7s-lock"
+        v-on:enter="$refs.landingSignupButton.handleClick()"
       />
       <b-form-invalid-feedback class="signup-invalid-feedback" :state="false">
         {{ errors[0] }}
@@ -68,11 +69,12 @@
     <div class="card-footer text-center">
       <RequestLimiterButton
         :disabled="invalid"
-        id="join-mailing-list-button"
+        id="landing-signup-button"
         v-on:click="handleRegister"
         inputStyle="background-color: #ffffff; color: #00838F"
         rounded
         :loading="loading"
+        ref="landingSignupButton"
       >
         Get Started
       </RequestLimiterButton>
@@ -114,11 +116,11 @@ export default {
   methods: {
     async handleRegister() {
       this.loading = true;
-      this.message = "";
       const isValid = await this.$refs.observer.validate();
       if (!isValid) {
         return;
       }
+      this.message = "";
       try {
         const res = await this.$store.dispatch("auth/register", {
           user: this.user,
