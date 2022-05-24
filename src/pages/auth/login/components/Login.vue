@@ -104,19 +104,6 @@ export default {
     }
   },
 
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    },
-  },
-
-  created() {
-    if (this.loggedIn) {
-      const username = this.$store.state.auth.user.username;
-      this.$router.push(`/dashboard/${username}/strategy`);
-    }
-  },
-
   methods: {
     async handleLogin() {
       if (this.loading) {
@@ -143,6 +130,7 @@ export default {
               un: this.user.username,
             });
           }
+          this.$router.push(`/dashboard/${this.user.username}/strategy`);
         }
       } catch (err) {
         const status = err.response.status;

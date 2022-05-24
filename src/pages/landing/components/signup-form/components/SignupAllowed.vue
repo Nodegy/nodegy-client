@@ -126,7 +126,7 @@ export default {
         });
         if (res) {
           this.successful = true;
-          this.$router.push("/login").catch(() => {});
+          this.$router.push("/login");
         }
       } catch (err) {
         const msg =

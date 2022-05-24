@@ -2,7 +2,7 @@
   <div id="app">
     <template v-if="siteDisabled">Under Construction</template>
     <template v-else>
-      <div v-if="!currentUser">
+      <div v-if="!loggedIn">
         <router-view name="header" />
         <div class="wrapper">
           <router-view />

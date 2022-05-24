@@ -154,19 +154,18 @@ export default {
       } catch (err) {
         this.$emit("setMsg", { msg: "Invalid Code", isErr: true });
       } finally {
-        this.loading = false;
-      }
-
-      if (confirm) {
-        const login = await AuthService.login({
-          username: this.currentUser.email,
-          password: this.currentUser.password,
-        });
-        if (login) {
-          this.$nextTick(() => {
-            this.$router.push(`/dashboard/${username}/strategy`);
+        if (confirm) {
+          const login = await AuthService.login({
+            username: this.currentUser.email,
+            password: this.currentUser.password,
           });
+          if (login) {
+            this.$nextTick(() => {
+              this.$router.push(`/dashboard/${username}/strategy`);
+            });
+          }
         }
+        this.loading = false;
       }
     },
 
