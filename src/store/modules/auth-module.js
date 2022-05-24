@@ -55,7 +55,6 @@ export const auth = {
             commit('setUserEmail', updatedEmail);
             updateLSObj('user', 'email', updatedEmail);
         },
-
         setUser({ commit }, user) {
             commit('onSetUser', user)
         },
@@ -86,6 +85,7 @@ export const auth = {
             state.user = null;
         },
         logout(state) {
+            state.status.waitingVerification = false;
             state.status.loggedIn = false;
             state.user = null;
         },

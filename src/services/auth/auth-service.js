@@ -30,7 +30,6 @@ class AuthService {
 
                 return 'successful';
             };
-
         } catch (err) {
             store.dispatch('auth/loginFailure');
             errorHandler('Auth-service', 'login', err);
@@ -41,7 +40,12 @@ class AuthService {
     logout() {
         localStorage
             .removeItem('user');
-        store.dispatch('auth/setUser', null);
+        localStorage
+            .removeItem('prefs');
+        // store.dispatch('auth/setUser', null);
+        process.nextTick(() => {
+            window.location.reload();
+        })
     };
 
     async register(user, signupKey) {
