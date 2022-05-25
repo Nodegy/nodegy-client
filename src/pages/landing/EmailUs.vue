@@ -194,20 +194,16 @@ export default {
 
   methods: {
     async onSave() {
-      try {
-        const isValid = await this.$refs.observer.validate();
-        if (!isValid) {
-          return;
-        }
+      const isValid = await this.$refs.observer.validate();
+      if (!isValid) {
+        return;
+      }
 
-        this.showForm = false;
-        const confirm = await FeedbackService.create(this.feedback);
+      this.showForm = false;
+      const confirm = await FeedbackService.create(this.feedback);
 
-        if (confirm) {
-          this.successful = true;
-        }
-      } catch (err) {
-        // console.log(err);
+      if (confirm) {
+        this.successful = true;
       }
     },
 

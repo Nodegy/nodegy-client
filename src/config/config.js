@@ -6,7 +6,7 @@ export default {
     NODEGY_DISCORD_INVITE: 'https://discord.gg/yTSmNm9puF',
     REQUIRE_SIGNUP_KEY: true,
     REQUEST_RETRIES: 2,
-    LOG_ERRORS_TO_DB: false,
+    LOG_ERRORS_TO_DB: true,
     SECONDS_CYCLE: 10,
     REQUEST_LIMIT_PER_CYCLE: 5,
     API_URL: API_URL,

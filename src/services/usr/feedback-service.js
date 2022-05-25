@@ -5,8 +5,9 @@ const service = 'Feedback';
 
 class FeedbackService {
     async create(feedback) {
+        let payload;
         try {
-            const payload = {
+            payload = {
                 userId: feedback.userId,
                 email: feedback.email,
                 subject: feedback.subject,
@@ -19,11 +20,9 @@ class FeedbackService {
                 address,
                 payload
             );
-
             return Promise.resolve(res);
         } catch (err) {
-            await errorHandler(service, 'create', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'create', err, payload);
         };
     };
 
