@@ -181,28 +181,33 @@ export default {
     async onSave() {
       this.loading = true;
       let confirm;
-      let changeCheck;
-      try {
-        const isValid = await this.$refs.editor.validateAll();
-        if (isValid) {
-          changeCheck = checkForChanges(this.unedited, this.selected);
+      let changeCheck = { hasChanges: false };
+      let isValid;
 
-          if (changeCheck.hasChanges) {
-            const changes = changeCheck.changes;
-            confirm = this.selected.isNew
-              ? await StrategyService.create(changes, this.cid)
-              : await StrategyService.update(changes, this.selected, this.cid);
-          }
+      try {
+        isValid = await this.$refs.editor.validateAll();
+        if (!isValid) {
+          return;
         }
+
+        isValid = this.selected.alerts.length > 0;
+        if (!isValid) {
+          return;
+        }
+
+        changeCheck = checkForChanges(this.unedited, this.selected);
+        if (!changeCheck.hasChanges) {
+          return;
+        }
+
+        const changes = changeCheck.changes;
+        confirm = this.selected.isNew
+          ? await StrategyService.create(changes, this.cid)
+          : await StrategyService.update(changes, this.selected, this.cid);
       } catch (err) {
         await errorHandler("ManageStrategies", "onSave", err);
       } finally {
-        this.isEditing = confirm
-          ? false
-          : !changeCheck.hasChanges
-          ? false
-          : true;
-
+        this.isEditing = !confirm && changeCheck.hasChanges && !isValid;
         this.loading = false;
         if (!this.isEditing) {
           this.$emit("reselectTableRow");
