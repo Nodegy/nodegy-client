@@ -50,6 +50,7 @@
         addon-left-icon="pe-7s-lock"
         placeholder="Confirm Password"
         :state="null"
+        v-on:enter="$refs.resetPasswordConfirmButton.handleClick()"
       />
       <b-form-invalid-feedback class="auth-invalid-feedback" :state="false">
         {{ errors[0] }}
@@ -64,6 +65,7 @@
       rounded
       variant="primary"
       :loading="loading"
+      ref="resetPasswordConfirmButton"
     >
       Confirm
     </RequestLimiterButton>

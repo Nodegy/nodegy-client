@@ -17,6 +17,7 @@
           addon-left-icon="pe-7s-mail"
           placeholder="Email"
           :state="null"
+          v-on:enter="$refs.inputEmailSendCodeButton.handleClick()"
         />
         <b-form-invalid-feedback class="auth-invalid-feedback" :state="false">
           {{ errors[0] }}
@@ -31,13 +32,14 @@
         rounded
         variant="primary"
         :loading="loading"
+        ref="inputEmailSendCodeButton"
       >
         Send Code
       </RequestLimiterButton>
 
       <RequestLimiterButton
         :disabled="invalid"
-        id="input-email-send-code"
+        id="input-email-have-code"
         v-on:click="onHaveCode"
         isBlock
         rounded
