@@ -201,7 +201,6 @@ export default {
 
       this.showForm = false;
       const confirm = await FeedbackService.create(this.feedback);
-
       if (confirm) {
         this.successful = true;
       }

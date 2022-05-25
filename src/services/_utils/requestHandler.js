@@ -47,7 +47,7 @@ const handleRequest = async (service, requestType, address, payload) => {
         return res;
     } catch (err) {
         await requestResponseHandler(true, payload, err.response, requestType, service);
-        await errorHandler(service, 'handleRequest', err);
+        // await errorHandler(service, 'handleRequest', err);
         return err;
     };
 };

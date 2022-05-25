@@ -6,8 +6,9 @@ const service = 'Alert';
 
 class AlertService {
     async create(alert, cid) {
+        let payload;
         try {
-            const payload = {
+            payload = {
                 address: alert.address,
                 messages: alert.messages,
                 name: alert.name,
@@ -29,14 +30,15 @@ class AlertService {
                 return Promise.resolve(alert);
             };
         } catch (err) {
-            await errorHandler(service, 'create', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'create', err, payload);
+            return Promise.reject();
         };
     };
 
     async update(_id, changes, cid) {
+        let payload;
         try {
-            const payload = {
+            payload = {
                 _id: _id, ...changes
             };
 
@@ -54,8 +56,8 @@ class AlertService {
                 return Promise.resolve(alert);
             };
         } catch (err) {
-            await errorHandler(service, 'update', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'update', err, payload);
+            return Promise.reject();
         };
     };
 
@@ -74,8 +76,8 @@ class AlertService {
                 return Promise.resolve(res.data.payload);
             };
         } catch (err) {
-            await errorHandler(service, 'delete', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'delete', err, { alertId: alertId });
+            return Promise.reject();
         };
     };
 };

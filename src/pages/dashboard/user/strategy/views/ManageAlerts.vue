@@ -133,28 +133,29 @@ export default {
     },
 
     async onSave() {
+      this.loading = true;
+      const changeCheck = checkForChanges(this.unedited, this.selected);
+      let confirm;
       try {
-        this.loading = true;
-        const changeCheck = checkForChanges(this.unedited, this.selected);
-
         if (changeCheck.hasChanges) {
           const changes = changeCheck.changes;
-          const confirmSave = this.selected.isNew
+          confirm = this.selected.isNew
             ? await AlertService.create(changes, this.cid)
             : await AlertService.update(this.selected._id, changes, this.cid);
 
-          if (confirmSave) {
-            await this.setSelected({ item: confirmSave, cid: this.cid });
+          if (confirm) {
+            await this.setSelected({ item: confirm, cid: this.cid });
           }
         }
 
-        this.isEditing = false;
-        this.$emit("reselectTableRow");
-        this.loading = false;
+        this.isEditing = !confirm ? true : false;
+        if (!this.isEditing) {
+          this.$emit("reselectTableRow");
+        }
       } catch (err) {
-        await errorHandler("ManageAlerts", "onSave", err);
-        this.loading = false;
+        this.$emit("isErr");
       }
+      this.loading = false;
     },
 
     async onDelete() {
@@ -163,11 +164,10 @@ export default {
         const id = this.selected._id;
         await AlertService.delete(id);
         this.$emit("updateAlertsChange");
-        this.loading = false;
       } catch (err) {
-        await errorHandler("ManageAlerts", "onDelete", err);
-        this.loading = false;
+        this.$emit("isErr");
       }
+      this.loading = false;
     },
   },
 };
