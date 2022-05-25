@@ -28,3 +28,5 @@ pnpm-debug.log*
 api-url.js
 # Local Netlify folder
 .netlify
+
+deploy-config.js
