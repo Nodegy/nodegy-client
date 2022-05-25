@@ -27,7 +27,7 @@
 
       <b-col cols="2" class="text-right">
         <b-button variant="link" id="notifications-button-1" class="p-0">
-          <b-row align-v="center">
+          <b-row align-v="center" class="ml-0">
             <i
               :class="`material-icons md-30 md-light ${
                 menuActive ? 'md-selected' : 'md-hover'
