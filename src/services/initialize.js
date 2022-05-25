@@ -15,7 +15,6 @@ class InitService {
             errorHandler('InitService', 'init', err);
             return false;
         };
-
     };
 };
 

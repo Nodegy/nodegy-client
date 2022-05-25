@@ -151,7 +151,11 @@ export default {
       this.strategiesTableFields = val;
     },
     onSelectStrategiesTableRow() {
-      this.$nextTick(() => this.$refs.stratsTable.selectRow());
+      this.$nextTick(() => {
+        if (this.strategies.length > 0) {
+          this.$refs.stratsTable.selectRow();
+        }
+      });
     },
     onToggleStrategiesEdit(val) {
       this.strategiesIsEditing = val;
@@ -164,7 +168,11 @@ export default {
       this.alertsTableFields = val;
     },
     onSelectAlertTableRow() {
-      this.$nextTick(() => this.$refs.alertsTable.selectRow());
+      this.$nextTick(() => {
+        if (this.alerts.length > 0) {
+          this.$refs.alertsTable.selectRow();
+        }
+      });
     },
     onToggleAlertsEdit(val) {
       this.alertsIsEditing = val;

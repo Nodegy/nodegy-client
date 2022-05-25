@@ -225,6 +225,7 @@
               @click.prevent="onAddCondition(posIdx)"
               variant="link"
               class="pt-0"
+              style="width: 150px"
             >
               <b-row align-v="center">
                 <i
@@ -246,6 +247,7 @@
           @click.prevent="onAddPosition()"
           variant="link"
           :disabled="!allowAddPosition"
+          style="width: 150px"
         >
           <b-row align-v="center">
             <i

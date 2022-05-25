@@ -1,8 +1,6 @@
 <template>
   <div class="mx-1">
-    <i type="button" class="material-icons md-18 md-hover text-info" :id="id"
-      >info_outline</i
-    >
+    <i class="material-icons md-18 md-hover text-info" :id="id">info_outline</i>
     <b-tooltip :target="id" triggers="hover">
       {{ tip }}
     </b-tooltip>

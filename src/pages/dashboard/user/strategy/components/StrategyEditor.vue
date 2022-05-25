@@ -54,7 +54,7 @@
                         } ${label}`
                       : `${label} Details`
                   "
-                  :invalid="invalid"
+                  :invalid="invalid || !selected.alerts.length"
                   :isEditing="isEditing"
                   :label="label"
                   showButtons

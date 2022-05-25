@@ -19,6 +19,7 @@
           v-model="vCode"
           placeholder="6 digit verification code"
           autofocus
+          v-on:enter="$refs.confirmAccountConfirmButton.handleClick()"
         />
         <b-form-invalid-feedback class="auth-invalid-feedback" :state="false"
           >{{ errors[0] }}
@@ -33,6 +34,7 @@
         rounded
         variant="primary"
         :loading="loading"
+        ref="confirmAccountConfirmButton"
       >
         Confirm
       </RequestLimiterButton>
@@ -70,6 +72,7 @@
           v-model="email"
           placeholder="confirm email address"
           autofocus
+          v-on:enter="$refs.confirmAccountSendNewCodeButton.handleClick()"
         />
         <b-form-invalid-feedback class="auth-invalid-feedback" :state="false"
           >{{ errors[0] }}
@@ -83,6 +86,7 @@
           rounded
           variant="primary"
           :loading="loading"
+          ref="confirmAccountSendNewCodeButton"
         >
           Send New Code
         </RequestLimiterButton>
