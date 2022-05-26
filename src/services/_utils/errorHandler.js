@@ -13,13 +13,11 @@ export default async (service, func, err, payload) => {
         };
 
         if (process.env.NODE_ENV === 'development') {
-            console.log('Error: ', errPayload, { err });
+            // console.log('Error: ', errPayload, { err });
         };
         if (config.LOG_ERRORS_TO_DB) {
             await axios.post(API_URL, errPayload);
         };
 
-    } catch (err) {
-        // console.log('err in errorHandler: ', err);
-    };
+    } catch (err) { };
 };

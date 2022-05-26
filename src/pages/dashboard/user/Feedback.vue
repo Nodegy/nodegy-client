@@ -150,9 +150,7 @@ export default {
           this.successful = true;
           this.displayMsg = "Feedback Successfully Submitted.";
         }
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     },
 
     resetForm() {

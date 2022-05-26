@@ -218,9 +218,7 @@ export default {
           return false;
         }
         return true;
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     },
   },
 };

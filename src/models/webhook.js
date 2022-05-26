@@ -9,7 +9,7 @@ export default class Webhook {
     };
 
     getEndpoint() {
-        return config.API_URL + "wh/" + this.eid;
+        return config.WH_URL + "wh/" + this.eid;
     };
 
     getPayload() {

@@ -41,7 +41,7 @@ export default {
         this.$emit("selectedTheme", theme);
         await UserService.updatePrefs("theme", theme);
       } catch (err) {
-        // console.log(`Error in chooseTheme: ${err}`);
+        this.$emit("isErr");
       }
     },
   },

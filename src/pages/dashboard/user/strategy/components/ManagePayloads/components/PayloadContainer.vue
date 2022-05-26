@@ -26,7 +26,7 @@
             no-auto-shrink
           />
 
-          <b-row style="height: 0.05px" align-h="center">
+          <b-row style="height: 10px; color: green" align-h="center">
             <span>{{ message }}</span>
           </b-row>
         </template>
@@ -42,7 +42,7 @@
             :isActive="isActive"
             :isReady="ready"
             :pIdx="pIdx"
-            v-on:copy="copyToClipboard"
+            v-on:copyToClipboard="copyToClipboard"
             v-on:toggleReady="toggleReady"
           />
         </template>
