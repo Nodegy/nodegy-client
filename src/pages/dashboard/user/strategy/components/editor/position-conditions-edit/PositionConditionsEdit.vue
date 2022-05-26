@@ -281,9 +281,6 @@ import {
 } from "bootstrap-vue";
 import { InfoTooltip } from "@/components/index";
 import { SendPayloadButton } from "./components/index";
-import { errorHandler } from "@/services/_utils/index";
-import Webhook from "@/models/webhook";
-import WebhookService from "@/services/usr/webhook-service";
 
 export default {
   name: "PositionConditionsEdit",
@@ -512,7 +509,7 @@ export default {
 
         return isValidCheck;
       } catch (err) {
-        errorHandler("PositionConditionsEdit", "validatePositionSelect", err);
+        this.$emit("isErr");
       }
     },
 

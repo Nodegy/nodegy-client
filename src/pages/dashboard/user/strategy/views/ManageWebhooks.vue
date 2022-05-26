@@ -49,7 +49,6 @@ import { BCard, BCol, BRow, BTableLite } from "bootstrap-vue";
 import { formatTime } from "@/helpers/index";
 import { mapGetters } from "vuex";
 import { EditorHead } from "@/pages/dashboard/user/strategy/components/editor/index";
-import { errorHandler } from "@/services/_utils/index";
 import WebhookService from "@/services/usr/webhook-service";
 
 export default {
@@ -146,7 +145,7 @@ export default {
         const webhookId = this.selected._id;
         await WebhookService.deleteOne(webhookId, this.cid);
       } catch (err) {
-        await errorHandler("ManageWebhooks", "onDeleteOne", err);
+        this.$emit("isErr");
       }
     },
 
@@ -154,7 +153,7 @@ export default {
       try {
         await WebhookService.deleteAll(this.cid);
       } catch (err) {
-        await errorHandler("ManageWebhooks", "onDeleteAll", err);
+        this.$emit("isErr");
       }
     },
   },

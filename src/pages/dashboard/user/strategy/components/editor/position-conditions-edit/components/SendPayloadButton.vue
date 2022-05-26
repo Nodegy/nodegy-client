@@ -48,7 +48,7 @@ export default {
           this.stratSymbol
         );
       } catch (err) {
-        await errorHandler("PositionConditionsEdit", "onSendPayload", err);
+        this.$emit("isErr");
       }
     },
   },

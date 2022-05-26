@@ -105,7 +105,10 @@ export default {
           this.showResetPw = true;
         }
       } catch (err) {
-        this.$emit("setMsg", { msg: err.response.data.message, isErr: true });
+        this.$emit("setMsg", {
+          msg: "An Error occured.  Please refresh the page and try again.",
+          isErr: true,
+        });
       } finally {
         this.loading = false;
       }
@@ -120,7 +123,7 @@ export default {
         }
       } catch (err) {
         this.$emit("setMsg", {
-          msg: err.response.data.message,
+          msg: "An Error occured.  Please refresh the page and try again.",
           isErr: true,
         });
       }
