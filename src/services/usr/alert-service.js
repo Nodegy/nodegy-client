@@ -76,7 +76,7 @@ class AlertService {
                 return Promise.resolve(res.data.payload);
             };
         } catch (err) {
-            await errorHandler(service, 'delete', err, { alertId: alertId });
+            await errorHandler(service, 'delete', err, { _id: alertId });
             return Promise.reject();
         };
     };

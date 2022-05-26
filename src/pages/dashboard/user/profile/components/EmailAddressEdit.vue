@@ -105,7 +105,7 @@ export default {
             },
             (err) => {
               const msg = `There was an error updating Email. ${err.response.data.message}`;
-              this.setMsg(msg, true);
+              this.$emit("setMsg", msg, true);
               return;
             }
           );

@@ -28,7 +28,7 @@ const handleRequest = async (service, requestType, address, payload) => {
             case 'delete':
             case 'deleteone':
             case 'deleteall':
-                res = await axios.delete(requestAddress + '/' + payload);
+                res = Object.keys(payload).length > 0 ? await axios.delete(requestAddress + '/' + payload) : await axios.delete(requestAddress);
                 break;
             case 'get':
                 res = await axios.get(requestAddress, payload);

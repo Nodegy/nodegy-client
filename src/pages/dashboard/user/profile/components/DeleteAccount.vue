@@ -75,7 +75,7 @@ export default {
         }
       } catch (err) {
         const msg = err.response;
-        this.$emit("setMsg", err.response, true);
+        this.$emit("setMsg", err, true);
       }
     },
 
@@ -91,5 +91,5 @@ export default {
   width: 50%;
 }
 </style>
-    
+    rn d
     

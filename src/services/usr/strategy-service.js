@@ -75,7 +75,7 @@ class StrategyService {
             };
 
         } catch (err) {
-            await errorHandler(service, 'update', err), payload;
+            await errorHandler(service, 'update', err, payload);
             return Promise.reject();
         };
     };
@@ -95,7 +95,7 @@ class StrategyService {
                 return Promise.resolve(res.data.payload);
             };
         } catch (err) {
-            await errorHandler(service, 'delete', err, { stratId: stratId });
+            await errorHandler(service, 'delete', err, { _id: stratId });
             return Promise.reject();
         };
     };
