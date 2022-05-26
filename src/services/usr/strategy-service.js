@@ -5,8 +5,9 @@ const service = 'Strategy';
 
 class StrategyService {
     async create(strategy, cid) {
+        let payload;
         try {
-            const payload = strategy.getPreparedStrategy();
+            payload = strategy.getPreparedStrategy();
             const res = await requestHandler(
                 service,
                 'create',
@@ -23,29 +24,36 @@ class StrategyService {
                 return Promise.resolve(true);
             };
         } catch (err) {
-            await errorHandler(service, 'create', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'create', err, payload);
+            return Promise.reject();
         };
     };
 
     async update(changes, inputStrat, cid) {
-        const payload = {
-            _id: inputStrat._id,
-            ...inputStrat.getChanges(changes)
-        };
-        const res = await requestHandler(
-            service,
-            'update',
-            address,
-            payload
-        );
-        if (res) {
-            let strategy = res.data.payload;
-            strategy.alerts = inputStrat.alerts;
-            await store.dispatch('stratStore/updateStrategies', { strategy: strategy, isNew: false });
-            await store.dispatch('selected/setSelected', { item: strategy, cid: cid });
-            return Promise.resolve(true);
-        };
+        let payload;
+        try {
+            payload = {
+                _id: inputStrat._id,
+                ...inputStrat.getChanges(changes)
+            };
+            const res = await requestHandler(
+                service,
+                'update',
+                address,
+                payload
+            );
+            if (res) {
+                let strategy = res.data.payload;
+                strategy.alerts = inputStrat.alerts;
+                await store.dispatch('stratStore/updateStrategies', { strategy: strategy, isNew: false });
+                await store.dispatch('selected/setSelected', { item: strategy, cid: cid });
+                return Promise.resolve(true);
+            };
+        } catch (err) {
+            await errorHandler(service, 'update', err, payload);
+            return Promise.reject();
+        }
+
     };
 
     async updateActiveDetails(changes, inputStrat, cid) {
@@ -67,8 +75,8 @@ class StrategyService {
             };
 
         } catch (err) {
-            await errorHandler(service, 'update', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'update', err), payload;
+            return Promise.reject();
         };
     };
 
@@ -87,8 +95,8 @@ class StrategyService {
                 return Promise.resolve(res.data.payload);
             };
         } catch (err) {
-            await errorHandler(service, 'delete', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'delete', err, { stratId: stratId });
+            return Promise.reject();
         };
     };
 };

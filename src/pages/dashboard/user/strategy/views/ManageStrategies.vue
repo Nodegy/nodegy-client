@@ -36,7 +36,6 @@ import ManagePayloads from "@/pages/dashboard/user/strategy/components/ManagePay
 import Strategy from "@/models/strategy";
 import StrategyEditor from "@/pages/dashboard/user/strategy/components/StrategyEditor";
 import StrategyService from "@/services/usr/strategy-service";
-import { errorHandler } from "@/services/_utils/index";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -205,13 +204,12 @@ export default {
           ? await StrategyService.create(changes, this.cid)
           : await StrategyService.update(changes, this.selected, this.cid);
       } catch (err) {
-        await errorHandler("ManageStrategies", "onSave", err);
-      } finally {
-        this.isEditing = !confirm && changeCheck.hasChanges && !isValid;
-        this.loading = false;
-        if (!this.isEditing) {
-          this.$emit("reselectTableRow");
-        }
+        this.$emit("isErr");
+      }
+      this.isEditing = !confirm && changeCheck.hasChanges && !isValid;
+      this.loading = false;
+      if (!this.isEditing) {
+        this.$emit("reselectTableRow");
       }
     },
 
@@ -237,10 +235,9 @@ export default {
           this.$emit("reselectTableRow");
         }
       } catch (err) {
-        await errorHandler("ManageStrategies", "onSaveActiveDetails", err);
-      } finally {
-        this.loading = false;
+        this.$emit("isErr");
       }
+      this.loading = false;
     },
 
     async onResetActiveDetails() {
@@ -253,15 +250,14 @@ export default {
     },
 
     async onDelete() {
+      this.loading = true;
+      const stratId = this.selected._id;
       try {
-        this.loading = true;
-        const stratId = this.selected._id;
         await StrategyService.delete(stratId, this.cid);
-        this.loading = false;
       } catch (err) {
-        await errorHandler("ManageStrategies", "onDelete", err);
-        this.loading = false;
+        this.$emit("isErr");
       }
+      this.loading = false;
     },
 
     updateAlertsChange() {

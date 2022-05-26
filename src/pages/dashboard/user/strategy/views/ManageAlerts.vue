@@ -15,7 +15,6 @@
 import Alert from "@/models/alert";
 import AlertEditor from "@/pages/dashboard/user/strategy/components/AlertEditor";
 import AlertService from "@/services/usr/alert-service";
-import { errorHandler } from "@/services/_utils/index";
 import { checkForChanges, formatTime } from "@/helpers/index";
 import { mapActions, mapGetters } from "vuex";
 
