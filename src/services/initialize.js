@@ -9,7 +9,7 @@ class InitService {
                 await LoadService.stratStore();
             }
             await store.dispatch('initApp/initApp', true);
-            return Promise.resolve();
+            return Promise.resolve(true);
 
         } catch (err) {
             await errorHandler('InitService', 'init', err);

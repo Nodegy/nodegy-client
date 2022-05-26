@@ -16,9 +16,7 @@ export const prefs = {
                 commit('setTheme', userPrefs.theme);
                 localStorage.setItem('prefs', JSON.stringify(userPrefs));
 
-            } catch (err) {
-                // console.log(err);
-            }
+            } catch (err) { }
         },
 
         async updatePref({ commit }, { key, val }) {
@@ -39,9 +37,7 @@ export const prefs = {
                 updateLSObj('prefs', key, val);
                 return Promise.resolve(confirm.data);
 
-
             } catch (err) {
-                // console.log(`Error in updatePrefs: ${err}`);
                 return Promise.reject(err);
             };
         },

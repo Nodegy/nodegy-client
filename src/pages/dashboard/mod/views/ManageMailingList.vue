@@ -59,17 +59,13 @@ export default {
     async loadMailingList() {
       try {
         await ModMailingListService.getMailingList();
-      } catch (err) {
-        // console.log("err: ", err);
-      }
+      } catch (err) {}
     },
 
     async addToList() {
       try {
         await MailingListService.add(this.form.email);
-      } catch (err) {
-        // console.log("err: ", err);
-      }
+      } catch (err) {}
     },
 
     async onDelete(selected) {

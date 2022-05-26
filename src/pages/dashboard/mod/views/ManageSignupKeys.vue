@@ -93,9 +93,7 @@ export default {
         if (allKeys) {
           this.allKeys = allKeys.data.payload;
         }
-      } catch (err) {
-        // console.log("err: ", err);
-      }
+      } catch (err) {}
     },
 
     async onDelete(selected) {
