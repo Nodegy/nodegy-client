@@ -29,6 +29,6 @@ export default class Alert {
     };
 
     getDefaultMessage(pos) {
-        return `Alert Triggered! Name: {{ alert name }}.  Position: ${pos}.  Time: {{ time }}.`;
+        return `Alert Triggered! Name: {{ alert name }}.  Position: ${pos}.`;
     };
 };
