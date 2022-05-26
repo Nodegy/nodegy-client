@@ -28,13 +28,23 @@
         <b-row class="text-center">
           <b-col>
             <b-button
+              class="mr-1"
               ref="cancel"
-              variant="outline-danger"
+              variant="danger"
               size="sm"
               aria-describedby="cancel-label"
               @click="$emit('close')"
             >
               Close Error
+            </b-button>
+            <b-button
+              class="ml-1"
+              variant="primary"
+              size="sm"
+              aria-describedby="refresh-page"
+              @click="refreshPage"
+            >
+              Refresh Page
             </b-button>
           </b-col>
         </b-row>
@@ -63,6 +73,11 @@ export default {
     onShown() {
       // Focus the cancel button when the overlay is showing
       this.$refs.cancel.focus();
+    },
+    refreshPage() {
+      process.nextTick(() => {
+        window.location.reload();
+      });
     },
     // onHidden() {
     //   // Focus the show button when the overlay is removed

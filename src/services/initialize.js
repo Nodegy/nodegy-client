@@ -9,11 +9,11 @@ class InitService {
                 await LoadService.stratStore();
             }
             await store.dispatch('initApp/initApp', true);
-            return true;
+            return Promise.resolve();
 
         } catch (err) {
-            errorHandler('InitService', 'init', err);
-            return false;
+            await errorHandler('InitService', 'init', err);
+            return Promise.reject();
         };
     };
 };

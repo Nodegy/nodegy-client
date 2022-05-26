@@ -106,7 +106,10 @@
                     <b-col cols="" sm="3" />
                   </b-row>
 
-                  <AmPmSelect v-on:changeAmPm="getCurrentDateTime" />
+                  <AmPmSelect
+                    v-on:changeAmPm="getCurrentDateTime"
+                    v-on:setMsg="setMsg"
+                  />
 
                   <TimeZoneSelect
                     ref="timeZoneSelect"
@@ -116,6 +119,9 @@
                 </template>
               </ValidationObserver>
               <DeleteAccount
+                v-if="
+                  !isEditing.username && !isEditing.password && !isEditing.email
+                "
                 v-on:setMsg="setMsg"
                 v-on:toggleIsDeleting="isDeleting = !isDeleting"
                 :isDeleting="isDeleting"
@@ -312,7 +318,9 @@ export default {
     },
 
     setMsg(msg, isErr) {
-      // console.log(msg, isErr);
+      console.log("setting: ");
+      console.log("msg: ", msg);
+      console.log("isErr: ", isErr);
       this.msgColor = isErr ? "text-danger" : "text-success";
       this.message = msg;
       setTimeout(() => (this.message = null), 20000);

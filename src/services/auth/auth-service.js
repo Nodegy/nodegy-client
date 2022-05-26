@@ -61,33 +61,41 @@ class AuthService {
                 return res;
             }
         } catch (err) {
-            errorHandler('Auth-service', 'register', err);
+            await errorHandler('Auth-service', 'register', err);
             return err;
         };
     };
 
     async confirm(email, key, timezone, vCode) {
-        const payload = {
-            email: email,
-            timezone: timezone,
-            vCode: vCode,
-        };
+        try {
+            const payload = {
+                email: email,
+                timezone: timezone,
+                vCode: vCode,
+            };
 
-        if (signupKeyRequired) {
-            payload.key = key;
-        };
+            if (signupKeyRequired) {
+                payload.key = key;
+            };
 
-        return await axios
-            .post(API_URL + 'confirm', payload);
+            return await axios
+                .post(API_URL + 'confirm', payload);
+        } catch (err) {
+            await errorHandler('Auth-service', 'confirm', err);
+        }
     };
 
-    resetPw(email, vCode, password) {
-        return axios
-            .patch(API_URL + 'verification/resetpw', {
-                email: email,
-                vCode: vCode,
-                password: password
-            });
+    async resetPw(email, vCode, password) {
+        try {
+            return axios
+                .patch(API_URL + 'verification/resetpw', {
+                    email: email,
+                    vCode: vCode,
+                    password: password
+                });
+        } catch (err) {
+            await errorHandler('Auth-service', 'resetPw', err);
+        }
     };
 };
 

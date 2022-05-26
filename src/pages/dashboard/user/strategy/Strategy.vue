@@ -78,6 +78,7 @@
         v-on:setCid="onSetAlertsCid"
         v-on:setTableFields="onSetAlertsTableFields"
         v-on:toggleEdit="onToggleAlertsEdit"
+        v-on:isErr="setIsResErr"
         ref="manageAlerts"
       />
       <ManageWebhooks
@@ -87,7 +88,7 @@
         ref="manageWebhooks"
       />
     </ErrorOverlay>
-    <RequestResponseArea v-on:isErr="isResErr = true" />
+    <RequestResponseArea v-on:isErr="setIsResErr" />
   </div>
 </template>
 
@@ -187,6 +188,12 @@ export default {
 
     onSaveActiveTab(val) {
       this.activeTab = val;
+    },
+
+    setIsResErr() {
+      if (!this.isResErr) {
+        this.isResErr = true;
+      }
     },
   },
 };

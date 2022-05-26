@@ -6,27 +6,27 @@ const service = 'User';
 
 class UserService {
     async updateUserName(updatedUserName) {
+        let payload;
         try {
-            const payload = {
+            payload = {
                 username: updatedUserName
             };
-
             await requestHandler(
                 service,
                 'update',
                 address,
                 payload
             );
-
         } catch (err) {
-            await errorHandler(service, 'update', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'update', err, payload);
+            return Promise.reject();
         };
     };
 
     async updateUserEmail(updatedEmail) {
+        let payload;
         try {
-            const payload = {
+            payload = {
                 email: updatedEmail
             };
 
@@ -38,14 +38,15 @@ class UserService {
             );
 
         } catch (err) {
-            await errorHandler(service, 'update', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'update', err, payload);
+            return Promise.reject();
         };
     };
 
     async updatePassword(password) {
+        let payload;
         try {
-            const payload = {
+            payload = {
                 password: password
             };
 
@@ -57,18 +58,18 @@ class UserService {
             );
 
         } catch (err) {
-            await errorHandler(service, 'update', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'update', err, { password: 'removed' });
+            return Promise.reject();
         };
     };
 
     async updatePrefs(key, val) {
+        let payload;
         try {
             const prefs = store.state.prefs;
             prefs[key] = val;
-
             if (prefs.timezone && prefs.timeFormat && prefs.theme) {
-                const payload = {
+                payload = {
                     preferences: {
                         timezone: prefs.timezone,
                         timeFormat: prefs.timeFormat,
@@ -91,8 +92,8 @@ class UserService {
                 };
             };
         } catch (err) {
-            await errorHandler(service, 'update', err);
-            return Promise.reject(err);
+            await errorHandler(service, 'update', err, payload);
+            return Promise.reject();
         };
     };
 
@@ -111,7 +112,7 @@ class UserService {
             };
         } catch (err) {
             await errorHandler(service, 'delete', err);
-            return Promise.reject(err);
+            return Promise.reject();
         };
     };
 

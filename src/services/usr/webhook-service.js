@@ -6,8 +6,9 @@ const service = 'Webhook';
 
 class WebhookService {
     async create(conditions, eid, stratId, symbol) {
+        let payload;
         try {
-            const payload = new Webhook(stratId, conditions, eid, symbol).getPayload();
+            payload = new Webhook(stratId, conditions, eid, symbol).getPayload();
             const res = await requestHandler(
                 service,
                 'create',
@@ -16,7 +17,7 @@ class WebhookService {
             );
             return Promise.resolve(res);
         } catch (err) {
-            await errorHandler(service, 'create', err);
+            await errorHandler(service, 'create', err, payload);
             return Promise.reject(err);
         };
     };

@@ -4,8 +4,9 @@ const service = 'Signup Keys';
 
 class SignupKeysService {
     async verifySignupKey(key) {
+        let payload;
         try {
-            const payload = {
+            payload = {
                 key: key,
             };
 
@@ -20,7 +21,7 @@ class SignupKeysService {
                 return Promise.resolve(res);
             };
         } catch (err) {
-            await errorHandler(service, 'create', err);
+            await errorHandler(service, 'create', err, payload);
             return Promise.reject(err);
         };
     };

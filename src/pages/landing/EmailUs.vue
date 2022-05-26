@@ -158,6 +158,7 @@
 <script>
 import PageTitle from "@/layout-dashboard/Components/PageTitle.vue";
 import Feedback from "@/models/feedback";
+import FeedbackService from "@/services/usr/feedback-service";
 import {
   BButton,
   BCard,
@@ -193,19 +194,15 @@ export default {
 
   methods: {
     async onSave() {
-      try {
-        // TODO: Test with backend
-        const isValid = await this.$refs.observer.validate();
-        if (!isValid) {
-          return;
-        }
+      const isValid = await this.$refs.observer.validate();
+      if (!isValid) {
+        return;
+      }
 
-        this.showForm = false;
-        this.successful = (await FeedbackService.create(this.feedback))
-          ? true
-          : false;
-      } catch (err) {
-        // console.log(err);
+      this.showForm = false;
+      const confirm = await FeedbackService.create(this.feedback);
+      if (confirm) {
+        this.successful = true;
       }
     },
 

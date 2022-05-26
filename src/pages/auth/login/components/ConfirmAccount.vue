@@ -203,7 +203,7 @@ export default {
         }
       } catch (err) {
         this.$emit("setMsg", {
-          msg: err,
+          msg: "An Error occured.  Please refresh the page and try again.",
           isErr: true,
         });
       } finally {
