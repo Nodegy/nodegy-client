@@ -1,2 +1,2 @@
 /devapi/*
-  X-Accel-Buffering: 'no'
+  X-Accel-Buffering: no
