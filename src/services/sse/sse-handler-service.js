@@ -1,6 +1,6 @@
 import { errorHandler } from '../_utils/index';
 import config from "@/config/config";
-const API_URL = config.API_URL;
+const API_URL = process.env.NODE_ENV === 'production' ? config.WH_URL : config.API_URL;
 let source;
 import { handlePayload } from './_helpers/index';
 
