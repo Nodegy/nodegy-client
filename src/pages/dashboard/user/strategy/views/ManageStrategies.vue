@@ -177,21 +177,23 @@ export default {
       }
     },
 
-    async onSave() {
+    async onSave(skipValidation) {
       this.loading = true;
       let confirm;
       let changeCheck = { hasChanges: false };
       let isValid;
 
       try {
-        isValid = await this.$refs.editor.validateAll();
-        if (!isValid) {
-          return;
-        }
+        if (!skipValidation) {
+          isValid = await this.$refs.editor.validateAll();
+          if (!isValid) {
+            return;
+          }
 
-        isValid = this.selected.alerts.length > 0;
-        if (!isValid) {
-          return;
+          isValid = this.selected.alerts.length > 0;
+          if (!isValid) {
+            return;
+          }
         }
 
         changeCheck = checkForChanges(this.unedited, this.selected);
@@ -207,6 +209,7 @@ export default {
         this.$emit("isErr");
       }
       this.isEditing = !confirm && changeCheck.hasChanges && !isValid;
+
       this.loading = false;
       if (!this.isEditing) {
         this.$emit("reselectTableRow");
@@ -214,10 +217,14 @@ export default {
     },
 
     async onSaveActive(newActive) {
-      this.loading = true;
-      await this.onToggleEdit(true);
-      this.selected.active = newActive;
-      await this.onSave();
+      try {
+        this.loading = true;
+        await this.onToggleEdit(true);
+        this.selected.active = newActive;
+        await this.onSave(true);
+      } catch (err) {
+        // console.log("err: ", err);
+      }
     },
 
     async onSaveActiveDetails() {
