@@ -1,4 +1,4 @@
-import { API_URL, DEPLOY_ENV, WH_URL } from './deploy-config';
+import { API_URL, DEPLOY_ENV, WH_URL, WS_URL } from './deploy-config';
 
 export default {
     SITE_DISABLED: false,
@@ -11,5 +11,6 @@ export default {
     REQUEST_LIMIT_PER_CYCLE: 5,
     API_URL: API_URL,
     WH_URL: WH_URL,
-    DEPLOY_ENV: DEPLOY_ENV
+    WS_URL: WS_URL,
+    DEPLOY_ENV: DEPLOY_ENV,
 };

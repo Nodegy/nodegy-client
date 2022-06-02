@@ -1,8 +1,4 @@
 import store from '@/store/index.js';
-import { mapGetters } from 'vuex';
-mapGetters({
-    findAlerts: 'stratStore/findAlerts',
-});
 
 export default async (res) => {
     const details = res.details;
